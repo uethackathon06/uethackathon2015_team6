@@ -11,6 +11,10 @@ public class NetworkAPI {
     public static Test  getTest(String  username , String  test_URL) {
         Test    mTest = new Test();
         mTest.title = "Bai kt";
+        mTest.quizs = new Quiz[4];
+        for (int i = 0; i < 4; i++) {
+            mTest.quizs[i] = new Quiz();
+        }
         return mTest;
     }
 

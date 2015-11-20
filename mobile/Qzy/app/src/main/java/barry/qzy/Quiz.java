@@ -6,4 +6,13 @@ package barry.qzy;
 public class Quiz {
     String      question;
     String[]    answers;
+
+    Quiz() {
+        question = "?";
+        answers = new String[4];
+        answers[0] = "a";
+        answers[1] = "b";
+        answers[2] = "c";
+        answers[3] = "d";
+    }
 }
