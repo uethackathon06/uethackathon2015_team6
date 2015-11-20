@@ -1,28 +1,49 @@
-<section ng-controller="ArticlesController">
-  <div class="page-header">
-    <h1>New Article</h1>
+<section ng-controller="contestsController">
+  <div class="row">
+    <h2 class="col-md-6">
+      <div id="{{header.id + '-text'}}" ng-hide="header.edit" ng-bind="header.text" ng-click="startEdit(header)">{{header.text}}</div>
+      <form ng-show="header.edit" ng-submit="finishEdit(header)">
+        <input class="form-control" id="{{header.id + '-edit'}}" type="text" ng-model="header.text" placeholder="Enter title"/>
+      </form>
+    </h2>  
   </div>
-  <div class="col-md-12">
-    <form name="articleForm" class="form-horizontal" ng-submit="create(articleForm.$valid)" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label for="title">Title</label>
-          <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required>
-          <div ng-messages="articleForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Article title is required.</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="content">Content</label>
-          <textarea name="content" ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
-        </div>
-        <div class="form-group">
-          <input type="submit" class="btn btn-default">
-        </div>
-        <div ng-show="error" class="text-danger">
-          <strong ng-bind="error"></strong>
-        </div>
-      </fieldset>
+  
+  <br>
+
+  <div class="container col-md-10 questions">
+    <div ng-repeat="question in questions" class="question">
+      <div class="row">
+        <span style="color: white">____</span>
+        <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="deleteQuestion(questions, $index)"></span>  
+        <span><b>{{($index + 1).toString() + "."}}</b></span>
+        <span><b>{{question.text}}</b></span> 
+      </div>
+      <br>
+      <div class="col-md-offset-1" ng-repeat="choice in question.choices">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="deleteChoice(question, $index)"></span>  
+        <button class="btn-xs" ng-class="{'btn-success': choice.correct, 'btn-defaut': !choice.correct}" ng-click="toggleChoice(choice)"><b>{{chr[$index] + "___."}}</b></button>
+        <span class="choice">{{choice.text}}</span>
+      </div>
+      
+      
+      
+      <form class="col-md-offset-1" ng-submit="addNewChoice(question, question.currentText)">
+        <input class="form-control" id="{{question.id}}" type="text" ng-model="question.currentText" placeholder="Enter choice"/>
+      </form>   
+      <br>
+    </div>
+
+    <form ng-submit="addNewQuestion(currentText)">
+        <input class="form-control" type="text" ng-model="currentText" placeholder="Enter question"/>
     </form>
+
+    <br>
+
+    <form ng-submit="addNewQuestionFromText(textSample)">
+        <textarea class="form-control" rows="5" ng-model="textSample" placeholder="Add questions from text"></textarea>
+    </form>
+    <div class="row" style="height: 300px"></div>
   </div>
+
+
 </section>

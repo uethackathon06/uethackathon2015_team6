@@ -5,6 +5,73 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
   function ($scope, $stateParams, $location, Authentication, contests) {
     $scope.authentication = Authentication;
 
+    $scope.header = {
+      id: "header",
+      edit: true,
+      text: ""  
+    };
+
+    $scope.questions = [];
+    $scope.currentText = "";
+
+    $scope.chr = [];
+    for (var i = 0; i < 26; i++){
+      $scope.chr.push(String.fromCharCode(65 + i));
+    }
+    
+    $scope.startEdit = function(obj){
+      setTimeout(function(){
+        obj.edit = true;  
+        $scope.$apply();
+        $("#" + obj.id + "-edit").trigger('select');
+      }, 100);
+      //$("#" + obj.id + "-edit").trigger('select');
+    }
+
+    $scope.finishEdit = function(obj, callback, callbackArg){
+      obj.edit = false;
+      if (callback){
+        callback(callbackArg);
+      }
+    };
+
+    $scope.addNewQuestion = function(text){
+      var id = ($scope.questions.length + 1).toString();
+      $scope.questions.push({
+        id: id,
+        edit: false,
+        text: text,
+        currentText: "",
+        choices: []
+      });
+      $scope.currentText = "";
+      setTimeout(function(){
+        $("#" + id).trigger('select');
+      }, 100);
+    }
+
+    $scope.deleteQuestion = function(questions, index){
+      questions.splice(index, 1);
+    }
+
+    $scope.addNewChoice = function(obj, text){
+      var id = String.fromCharCode(65 + obj.choices.length);
+      console.log(id);
+      obj.choices.push({
+        edit: true,
+        text: text,
+        correct: false
+      });
+      obj.currentText = "";
+    }
+
+    $scope.deleteChoice = function(question, index){
+      question.choices.splice(index, 1);
+    }
+
+    $scope.toggleChoice = function(choice){
+      choice.correct = !choice.correct;
+    }
     // Create new Contest
     /*$scope.create = function (isValid) {
       $scope.error = null;
