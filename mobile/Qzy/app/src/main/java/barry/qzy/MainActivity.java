@@ -16,11 +16,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    String      username = "minh";
+
+
+    void    setUpGetTest() {
+        final EditText    testUrl = (EditText) getTestView.findViewById(R.id.test_url);
+        Button      getTestButton = (Button) getTestView.findViewById(R.id.get_test);
+        getTestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Test    mTest = NetworkAPI.getTest(username, testUrl.getText().toString());
+                container.removeView(getTestView);
+                container.addView(testView);
+                setUpTestView(mTest);
+            }
+        });
+    }
+
+    void    setUpTestView(Test  tTest) {
+        TextView    testTitle = (TextView) testView.findViewById(R.id.test_title);
+        testTitle.setText(tTest.title);
+    }
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -31,6 +56,8 @@ public class MainActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    View    testView , quizView , getTestView;
+    FrameLayout     container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +72,10 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        container = (FrameLayout) findViewById(R.id.container);
+        testView = getLayoutInflater().inflate(R.layout.test_layout , null);
+        getTestView = getLayoutInflater().inflate(R.layout.get_test_layout , null);
     }
 
     @Override
@@ -60,6 +91,9 @@ public class MainActivity extends ActionBarActivity
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section1);
+                container.removeAllViews();
+                container.addView(getTestView);
+                setUpGetTest();
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
