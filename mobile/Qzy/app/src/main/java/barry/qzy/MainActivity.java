@@ -1,6 +1,7 @@
 package barry.qzy;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -28,7 +29,7 @@ public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     String      username = "minh";
-
+    boolean[][] answerSheet;
 
     void    setUpGetTest() {
         final EditText    testUrl = (EditText) getTestView.findViewById(R.id.test_url);
@@ -59,6 +60,8 @@ public class MainActivity extends ActionBarActivity
             }
         });
 
+        answerSheet = new boolean[tTest.quizs.length][10];
+
         for (int i = 0; i < tTest.quizs.length; i++) {
             TableRow    tableRow  = new TableRow(this);
             View        quizView  = getLayoutInflater().inflate(R.layout.quiz_layout , null);
@@ -71,10 +74,15 @@ public class MainActivity extends ActionBarActivity
                 View        answerView  = getLayoutInflater().inflate(R.layout.answer_layout , null);
                 final Button      answerButton = (Button) answerView.findViewById(R.id.button);
                 answerButton.setText((char) ('A' + j) + ". " + tTest.quizs[i].answers[j].toString());
+                final int finalI = i;
+                final int finalJ = j;
                 answerButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // update answer sheet
+                        answerSheet[finalI][finalJ] ^= true;
+                        if (answerSheet[finalI][finalJ]) answerButton.setBackgroundColor(Color.parseColor("#bbbbbb"));
+                        else answerButton.setBackgroundColor(Color.parseColor("#dddddd"));
                     }
                 });
 
