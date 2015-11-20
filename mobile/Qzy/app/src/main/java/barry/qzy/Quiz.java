@@ -15,4 +15,9 @@ public class Quiz {
         answers[2] = "c";
         answers[3] = "d";
     }
+
+    Quiz(String     tQuestion , String[] tAnswers) {
+        question = tQuestion;
+        answers = tAnswers;
+    }
 }

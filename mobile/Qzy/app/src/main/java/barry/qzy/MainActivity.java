@@ -48,6 +48,17 @@ public class MainActivity extends ActionBarActivity
         TextView    testTitle = (TextView) testView.findViewById(R.id.test_title);
         testTitle.setText(tTest.title);
         TableLayout quizTable = (TableLayout) testView.findViewById(R.id.quizs);
+        Button      submitButton  = (Button)    testView.findViewById(R.id.submit_button);
+
+        quizTable.removeAllViews();
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // send the answer sheet to be judge and display the score
+            }
+        });
+
         for (int i = 0; i < tTest.quizs.length; i++) {
             TableRow    tableRow  = new TableRow(this);
             View        quizView  = getLayoutInflater().inflate(R.layout.quiz_layout , null);
@@ -58,7 +69,7 @@ public class MainActivity extends ActionBarActivity
             for (int j = 0; j < tTest.quizs[i].answers.length; j++) {
                 TableRow    answerRow   = new TableRow(this);
                 View        answerView  = getLayoutInflater().inflate(R.layout.answer_layout , null);
-                Button      answerButton = (Button) answerView.findViewById(R.id.button);
+                final Button      answerButton = (Button) answerView.findViewById(R.id.button);
                 answerButton.setText((char) ('A' + j) + ". " + tTest.quizs[i].answers[j].toString());
                 answerButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -72,6 +83,39 @@ public class MainActivity extends ActionBarActivity
             }
             tableRow.addView(quizView);
             quizTable.addView(tableRow);
+        }
+    }
+
+    void    setUpQuizView() {
+        Quiz    mQuiz = NetworkAPI.getQuiz(username);
+        TextView    questionTextView = (TextView)       quizView.findViewById(R.id.quiz_question);
+        TableLayout answerTable      = (TableLayout)    quizView.findViewById(R.id.quiz_answers);
+        Button      submitButton     = (Button)         quizView.findViewById(R.id.quiz_submit);
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //submit quiz answer to server
+            }
+        });
+
+        questionTextView.setText("Câu hỏi: " + mQuiz.question.toString());
+
+        for (int i = 0; i < mQuiz.answers.length; i++) {
+            TableRow    answerRow = new TableRow(this);
+            View        answerView = getLayoutInflater().inflate(R.layout.answer_layout , null);
+            Button      answerButton = (Button) answerView.findViewById(R.id.button);
+
+            answerButton.setText((char) ('A' + i) + ". " + mQuiz.answers[i].toString());
+            answerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //update the answer sheet
+                }
+            });
+
+            answerRow.addView(answerView);
+            answerTable.addView(answerRow);
         }
     }
 
@@ -104,6 +148,7 @@ public class MainActivity extends ActionBarActivity
         container = (FrameLayout) findViewById(R.id.container);
         testView = getLayoutInflater().inflate(R.layout.test_layout , null);
         getTestView = getLayoutInflater().inflate(R.layout.get_test_layout , null);
+        quizView = getLayoutInflater().inflate(R.layout.take_quiz_layout , null);
     }
 
     @Override
@@ -125,6 +170,9 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
+                container.removeAllViews();
+                container.addView(quizView);
+                setUpQuizView();
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
