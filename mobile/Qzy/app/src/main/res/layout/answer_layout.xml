@@ -15,5 +15,6 @@
         android:gravity="center_vertical|left"
         android:textAllCaps="false"
         android:paddingLeft="10dp"
-        android:layout_marginLeft="6dp" />
+        android:layout_marginLeft="6dp"
+        android:background="#dddddd" />
 </LinearLayout>
