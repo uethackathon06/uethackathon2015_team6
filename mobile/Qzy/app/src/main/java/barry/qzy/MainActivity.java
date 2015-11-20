@@ -19,6 +19,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 
@@ -45,6 +47,32 @@ public class MainActivity extends ActionBarActivity
     void    setUpTestView(Test  tTest) {
         TextView    testTitle = (TextView) testView.findViewById(R.id.test_title);
         testTitle.setText(tTest.title);
+        TableLayout quizTable = (TableLayout) testView.findViewById(R.id.quizs);
+        for (int i = 0; i < tTest.quizs.length; i++) {
+            TableRow    tableRow  = new TableRow(this);
+            View        quizView  = getLayoutInflater().inflate(R.layout.quiz_layout , null);
+            TextView    questionTextView = (TextView) quizView.findViewById(R.id.quiz_question);
+            TableLayout answerTable       = (TableLayout) quizView.findViewById(R.id.quiz_answers);
+
+            questionTextView.setText("Câu " + Integer.toString(i+1) + " : " + tTest.quizs[i].question.toString());
+            for (int j = 0; j < tTest.quizs[i].answers.length; j++) {
+                TableRow    answerRow   = new TableRow(this);
+                View        answerView  = getLayoutInflater().inflate(R.layout.answer_layout , null);
+                Button      answerButton = (Button) answerView.findViewById(R.id.button);
+                answerButton.setText((char) ('A' + j) + ". " + tTest.quizs[i].answers[j].toString());
+                answerButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // update answer sheet
+                    }
+                });
+
+                answerRow.addView(answerView);
+                answerTable.addView(answerRow);
+            }
+            tableRow.addView(quizView);
+            quizTable.addView(tableRow);
+        }
     }
 
     /**
