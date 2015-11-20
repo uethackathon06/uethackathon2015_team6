@@ -8,8 +8,10 @@ public class NetworkAPI {
 
     }
 
-    public static void  getTest(String  username , String  test_URL) {
-
+    public static Test  getTest(String  username , String  test_URL) {
+        Test    mTest = new Test();
+        mTest.title = "Bai kt";
+        return mTest;
     }
 
     public static Quiz  getQuiz(String  username) {
