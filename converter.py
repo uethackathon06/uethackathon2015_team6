@@ -18,6 +18,10 @@ a = fi.read()
 hits = [m.start() for m in re.finditer(r"Câu\b" , a)]
 if (len(hits) == 0): 
 	hits = [m.start() for m in re.finditer(r"Question\b" , a)]
+if (len(hits) == 0): 
+	hits = [m.start() for m in re.finditer(r"Bài\b" , a)]
+if (len(hits) == 0): 
+	hits = [m.start() for m in re.finditer(r"\d\." , a)]
 if (len(hits) == 0):
 	hits = [m.start() for m in re.finditer(r"Q\b" , a)]
 Ahits = [m.start() for m in re.finditer(r"A\." , a)]
@@ -79,10 +83,16 @@ while (qi < len(hits)):
 
 	tres = {}
 
-	if (a[hits[qi]+7] == ' '):
-		tres["question"] =  a[hits[qi]+7:Ahits[ai]].decode("utf-8")
+	if ((a[hits[qi]] > '9') and (a[hits[qi]] < '0')):
+		if (a[hits[qi]+7] == ' '):
+			tres["question"] =  a[hits[qi]+7:Ahits[ai]].decode("utf-8")
+		else:
+			tres["question"] =  a[hits[qi]+8:Ahits[ai]].decode("utf-8")
 	else:
-		tres["question"] =  a[hits[qi]+8:Ahits[ai]].decode("utf-8")
+		if (a[hits[qi]+2] == ' '):
+			tres["question"] =  a[hits[qi]+2:Ahits[ai]].decode("utf-8")
+		else:
+			tres["question"] =  a[hits[qi]+3:Ahits[ai]].decode("utf-8")
 
 	tres["answer"] = []
 	tres["answer"].append(a[Ahits[ai]+2:Bhits[bi]].decode("utf-8"))
