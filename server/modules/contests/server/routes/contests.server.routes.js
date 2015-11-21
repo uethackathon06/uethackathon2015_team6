@@ -29,4 +29,12 @@ module.exports = function (app) {
 
   app.route('/contest/quizz')
     .post(contestP.quizz);
+
+  app.route('/contest/log')
+    .post(contestP.getLog);
+
+  app.get('/download', function(req, res){
+    var file = __dirname + '/../../../../../hw.doc';
+    res.download(file); // Set disposition and send it.
+  });
 };

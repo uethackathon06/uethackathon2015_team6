@@ -32,8 +32,10 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
       $http.post('contest/find', {id: id}).success(function(response){
         $scope.contest = response[0];
         $scope.header.text = response[0].header;
+
         if (response[0].questions)
           $scope.questions = response[0].questions;
+        
         for(var i = 0; i < $scope.questions.length; i++){
           $scope.questions[i].edit = false;
           var choices = $scope.questions[i].choices;

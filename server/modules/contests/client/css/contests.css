@@ -41,7 +41,7 @@
 
 .control-icon{
 	position: relative;
-	right: -1000px;
+	right: -970px;
 	bottom: -50px;
 }
 
@@ -56,4 +56,14 @@
 
 .question-input {
 	width: 850px;	
+}
+
+.answer-detail {
+	margin-bottom: 5px;
+}
+
+.detail-ctn {
+	background-color: #f8ecc2;
+	border-radius: 15px 50px 30px 5px;
+	height: 600px;
 }
