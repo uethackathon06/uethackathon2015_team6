@@ -16,11 +16,12 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
       edit: true,
       text: ""  
     };
-
     $scope.questions = [];
     $scope.currentText = "";
 
+    $scope.textSample = "";
     $scope.chr = [];
+
     for (var i = 0; i < 26; i++){
       $scope.chr.push(String.fromCharCode(65 + i));
     }
@@ -47,6 +48,36 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
         console.log(response);
       });
     }
+
+    $scope.addNewQuestionFromText = function(){
+     $http.post('contest/parseText', {
+        text: $scope.textSample
+      })
+      .success(function(response){
+        console.log(response);
+        for(var i = 0; i < response.length; i++){
+          var id = ($scope.questions.length + 1).toString();
+          var question = {
+            id: id,
+            edit: false,
+            text: response[i].question,
+            currentText: "",
+            choices: []
+          };
+          
+          for(var j = 0; j < response[i].answer.length; j++){
+            question.choices.push({
+              edit: true,
+              text: response[i].answer[j],
+              correct: false
+            })
+          }
+
+          $scope.questions.push(question);
+        }
+      }); 
+    }
+
 
     $scope.startEdit = function(obj){
       setTimeout(function(){
