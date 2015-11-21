@@ -2,6 +2,7 @@ package barry.qzy;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -169,6 +170,16 @@ public class MainActivity extends ActionBarActivity
             @Override
             protected   void    onPostExecute(String    response) {
                 System.out.println(response);
+                try {
+                    JSONObject  jsonRes = new JSONObject(response);
+                    TextView    resultText = (TextView) testView.findViewById(R.id.resultText);
+                    resultText.setText("Bạn làm được " + Integer.toString(jsonRes.getInt("correct")) + "/" + Integer.toString(jsonRes.getInt("total")) + " câu.");
+                    resultText.setTextColor(Color.RED);
+                    resultText.setTextSize(18);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         }.execute();
     }
