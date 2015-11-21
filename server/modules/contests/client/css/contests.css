@@ -22,7 +22,7 @@
 
 .save-btn {
 	bottom: -20px;
-	right: -120px;
+	right: -95px;
 	width: 200px;
 	position: relative;
 }
@@ -48,4 +48,12 @@
 .contest-date {
 	position: relative;
 	bottom: 40px;
+}
+
+.choice-input {
+	width: 500px;
+}
+
+.question-input {
+	width: 850px;	
 }

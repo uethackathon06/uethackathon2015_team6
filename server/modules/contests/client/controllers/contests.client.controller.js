@@ -13,7 +13,7 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
 
     $scope.header = {
       id: "header",
-      edit: true,
+      edit: false,
       text: ""  
     };
     $scope.questions = [];
@@ -34,6 +34,12 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
         $scope.header.text = response[0].header;
         if (response[0].questions)
           $scope.questions = response[0].questions;
+        for(var i = 0; i < $scope.questions.length; i++){
+          $scope.questions[i].edit = false;
+          var choices = $scope.questions[i].choices;
+          for(var j = 0; j < choices.length; j ++)
+            choices[j].edit = false;
+        }
       });
     }
       

@@ -87,6 +87,22 @@ exports.parseText = function(req, res) {
     var obj = JSON.parse(fs.readFileSync('../output.txt', 'utf8'));
     res.json(obj);
   }, 100);
-  
+}
+
+exports.quizz = function(req, res){
+  Contest.find({}, function(err, contests){
+    //console.log(contests);
+    var arr = [];
+    for(var i = 0; i < contests.length; i++){
+      if (!err && contests[i] && contests[i].questions){
+        //console.log(contests[i].questions);
+        for(var j = 0; j < contests[i].questions.length; j++){
+          arr.push(contests[i].questions[j]);
+        }
+      }  
+    }
+    //console.log(arr);
+    res.json(arr[Math.floor((Math.random() * arr.length) + 1)]);
+  });
 }
 
