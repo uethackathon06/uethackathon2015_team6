@@ -50,7 +50,7 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
     }
 
     $scope.addNewQuestionFromText = function(){
-     $http.post('contest/parseText', {
+     $http.post('contest/parsetext', {
         text: $scope.textSample
       })
       .success(function(response){
