@@ -14,11 +14,10 @@ test = json.JSONDecoder().decode(s)
 document.add_heading(test["header"] , 0)
 test = test["questions"]
 
-for q in test:
-	ss = q["text"]
-	for i in range(len(q["choices"])):
-		ss += chr(ord('A') + i) + ". " + q["choices"][i]["text"]
-
+for i in range(len(test)):
+	ss = "Câu " + str(i+1) + "." + test[i]["text"]
+	for j in range(len(test[i]["choices"])):
+		ss += chr(ord('A') + j) + ". " + test[i]["choices"][j]["text"]
 	document.add_paragraph(ss)
 	
 document.add_page_break()
