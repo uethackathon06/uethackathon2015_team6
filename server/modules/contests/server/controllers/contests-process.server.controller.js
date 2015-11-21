@@ -5,22 +5,43 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-  Contest = mongoose.model('Contest');
+  Contest = mongoose.model('Contest'),
+  Answer = mongoose.model('Answer');
 
 exports.mark = function(req, res){
   //console.log(req.body);
-  var mark = function(questions, answers){
+  var mark = function(id, questions, answers){
     var total = questions.length;
     var correct = 0;
-    //console.log(answers);
+    var answer = {};
+    answer.user = req.user;
+    if (req.user)
+      answer.username = req.user.username;
+    answer.questions = [];
+    answer.contest = id;
+
     for(var i = 0; i < questions.length; i++){
       var flag = true;
-      for(var j = 0; j < questions[i].choices.length; j++)
+      answer.questions.push({
+        key: [],
+        answer: [],
+        correct: true
+      });
+      for(var j = 0; j < questions[i].choices.length; j++){
         if (questions[i].choices[j].correct != answers[i][j])
           flag = false;
+
+        answer.questions[i].key.push(questions[i].choices[j].correct);
+        answer.questions[i].answer.push(answers[i][j]);
+      }
+      answer.questions[i].correct = flag;
       if (flag)
         correct += 1;
     }
+
+    answer.correct = correct;
+    answer.total = total;
+    Answer(answer).save();
 
     return {correct: correct, total: total};
   }
@@ -32,7 +53,7 @@ exports.mark = function(req, res){
     }
     contest = contest.toObject();
 
-    var result = mark(contest.questions, req.body.answers);
+    var result = mark(contest._id, contest.questions, req.body.answers);
     
     res.json(result);
   }); 
@@ -106,3 +127,8 @@ exports.quizz = function(req, res){
   });
 }
 
+exports.getLog = function(req, res){
+  Answer.find({contest: req.body.id}, function(err, answers){
+    res.json(answers);
+  });
+}

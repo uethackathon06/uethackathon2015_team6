@@ -20,6 +20,10 @@ angular.module('contests').config(['$stateProvider',
       .state('doContest', {
         url: '/do/:contestID',
         templateUrl: 'modules/contests/client/views/do-contest.client.view.html'
+      })
+      .state('logContest', {
+        url: '/log/:contestID',
+        templateUrl: 'modules/contests/client/views/log-contest.client.view.html'
       });
   }
 ]);
