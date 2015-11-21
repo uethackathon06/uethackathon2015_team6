@@ -51,3 +51,27 @@ exports.update = function (req, res) {
       console.log(err);
   });
 };
+
+exports.parseText = function(req, res) {
+  var fs = require('fs');
+
+
+  setTimeout(function() {
+      var process = require("child_process").exec(
+      'python ' + '../converter.py',
+      function (error, stdout, stderr) {
+        if (error) {
+          console.log(error.stack);
+          console.log('Error code: '+error.code);
+          console.log('Signal received: '+error.signal);
+        }
+        console.log('Child Process STDERR: '+stderr);
+        res.json(stdout);
+      }
+    );
+
+    process.on("exit", function (code) {
+      console.log("spawnEXIT:", code)
+    });
+  }, 500);
+}

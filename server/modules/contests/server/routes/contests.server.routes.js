@@ -17,4 +17,7 @@ module.exports = function (app) {
 
   app.route('/contest/update')
     .post(contest.update);
+
+   app.route('/contest/parseText')
+    .post(contest.parseText);
 };
