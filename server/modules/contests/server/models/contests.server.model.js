@@ -10,13 +10,28 @@ var mongoose = require('mongoose'),
  * Article Schema
  */
 var ContestSchema = new Schema({
-  created: {
+  dateCreated: {
     type: Date,
     default: Date.now
   },
-  user: {
+  dateStart: {
+    type: Date
+  },
+  dateEnd: {
+    type: Date
+  },
+  header: {
+    type: String,
+    default: 'Default Title'
+  },
+  creator: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  questions: {
+  },
+  shuffles: {
+
   }
 });
 
