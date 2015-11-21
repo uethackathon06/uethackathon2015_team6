@@ -12,5 +12,6 @@ angular.module('contests').run(['Menus',
       title: 'Create contests',
       state: 'createContest'
     });
+    
   }
 ]);

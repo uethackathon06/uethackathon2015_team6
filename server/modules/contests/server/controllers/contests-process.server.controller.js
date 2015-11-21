@@ -12,7 +12,7 @@ exports.mark = function(req, res){
   var mark = function(questions, answers){
     var total = questions.length;
     var correct = 0;
-    console.log(answers);
+    //console.log(answers);
     for(var i = 0; i < questions.length; i++){
       var flag = true;
       for(var j = 0; j < questions[i].choices.length; j++)
@@ -24,7 +24,7 @@ exports.mark = function(req, res){
 
     return {correct: correct, total: total};
   }
-
+  console.log(req.body);
   Contest.findOne({_id: req.body.id}, function(err, contest){
     if (err || !contest){
       res.json("Contest not exists");
@@ -42,14 +42,14 @@ exports.mark = function(req, res){
 exports.getcontest = function(req, res){
   //console.log(req.body);
   Contest.findOne({_id: req.body.id}, function(err, contest){
-    if (err || !contest){
+    if (err || !contest || !contest.questions){
       res.json("Contest not exists");
       return;
     }
     contest = contest.toObject();
     for(var i = 0; i < contest.questions.length; i++){
       for(var j = 0; j < contest.questions[i].choices.length; j++){
-        delete contest.questions[i].choices[j].correct;
+        contest.questions[i].choices[j].correct = false;
       }
     }
     res.json(contest);
@@ -75,7 +75,6 @@ exports.parseText = function(req, res) {
           console.log('Signal received: '+error.signal);
         }
         console.log('Child Process STDERR: '+stderr);
-        res.json(stdout);
       }
     );
 
@@ -90,3 +89,4 @@ exports.parseText = function(req, res) {
   }, 100);
   
 }
+
