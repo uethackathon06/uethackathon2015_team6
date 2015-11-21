@@ -1,11 +1,15 @@
 package barry.qzy;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 /**
  * Created by barry on 20/11/2015.
  */
 public class Quiz {
     String      question;
     String[]    answers;
+    boolean[]   result;
 
     Quiz() {
         question = "?";
@@ -16,8 +20,29 @@ public class Quiz {
         answers[3] = "d";
     }
 
-    Quiz(String     tQuestion , String[] tAnswers) {
+    Quiz(String     tQuestion , JSONArray tAnswers) {
         question = tQuestion;
-        answers = tAnswers;
+        answers = new String[tAnswers.length()];
+        for (int i = 0; i < tAnswers.length(); i++) {
+            try {
+                answers[i] = tAnswers.getJSONObject(i).getString("text");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    Quiz(String     tQuestion , JSONArray tAnswers , JSONArray  tAnswer2) {
+        question = tQuestion;
+        answers = new String[tAnswers.length()];
+        result = new boolean[tAnswers.length()];
+        for (int i = 0; i < tAnswers.length(); i++) {
+            try {
+                answers[i] = tAnswers.getJSONObject(i).getString("text");
+                result[i] = tAnswer2.getJSONObject(i).getBoolean("correct");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

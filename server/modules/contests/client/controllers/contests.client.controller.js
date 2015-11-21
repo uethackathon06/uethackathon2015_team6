@@ -143,7 +143,9 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
     $scope.download = function(){
       $http.post('/contest/savefile', $scope.contest).
       success(function(response){
-        console.log(response);
+        //$http.get('/contest/savefile');
+        //$window.open('/download');
+        window.location.href = '/contest/savefile';
       })
     }
 

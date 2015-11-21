@@ -116,12 +116,10 @@ exports.saveFile = function(req, res){
       if(err) {
           return console.log(err);
       }
-      else
-        res.json('ok');
   });   
   setTimeout(function() {
       var process = require("child_process").exec(
-      'python ' + '../converter.py',
+      'python ' + '../exporter.py',
       function (error, stdout, stderr) {
         if (error) {
           console.log(error.stack);
@@ -133,9 +131,15 @@ exports.saveFile = function(req, res){
     );
 
     process.on("exit", function (code) {
-      console.log("spawnEXIT:", code)
+      console.log("spawnEXIT:", code);
+      res.json('ok');
     });
   }, 100);
+}
+
+exports.download = function(req, res){
+  var file = __dirname + '/../../../../../test.docx';
+  res.download(file);
 }
 
 exports.quizz = function(req, res){

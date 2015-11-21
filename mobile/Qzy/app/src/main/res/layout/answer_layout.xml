@@ -16,5 +16,5 @@
         android:textAllCaps="false"
         android:paddingLeft="10dp"
         android:layout_marginLeft="6dp"
-        android:background="#dddddd" />
+        android:background="#e0e0e0" />
 </LinearLayout>

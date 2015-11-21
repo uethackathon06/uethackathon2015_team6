@@ -34,7 +34,8 @@ module.exports = function (app) {
     .post(contestP.getLog);
 
   app.route('/contest/savefile')
-    .post(contestP.saveFile);
+    .post(contestP.saveFile)
+    .get(contestP.download);
 
   /*app.get('/download', function(req, res){
     var file = __dirname + '/../../../../../hw.doc';

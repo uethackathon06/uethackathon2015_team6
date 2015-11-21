@@ -7,10 +7,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test URL"
+        android:text="URL"
         android:id="@+id/textView"
         android:layout_gravity="left|top"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="110dp"
         android:textSize="16dp"
         android:layout_marginLeft="20dp"
         android:textColor="#000000" />
@@ -20,14 +20,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/test_url"
         android:layout_gravity="right|top"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="20dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Get Test"
+        android:text="Tìm bài"
         android:id="@+id/get_test"
+        android:textAllCaps="false"
         android:layout_gravity="center" />
 
 </FrameLayout>

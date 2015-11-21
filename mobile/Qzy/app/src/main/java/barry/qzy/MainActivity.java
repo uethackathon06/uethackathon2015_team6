@@ -1,7 +1,10 @@
 package barry.qzy;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -24,6 +27,26 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -31,21 +54,174 @@ public class MainActivity extends ActionBarActivity
     String      username = "minh";
     boolean[][] answerSheet;
 
+    void    getTest(String  username , final String   testURL) {
+        new AsyncTask<String, String, String>() {
+            ProgressDialog  progressDialog;
+
+            @Override
+            protected void onPreExecute() {
+                progressDialog = new ProgressDialog(MainActivity.this);
+                progressDialog.setMessage("Searching for test");
+                progressDialog.show();
+            }
+
+            @Override
+            protected String  doInBackground(String... params) {
+                DefaultHttpClient httpClient = new DefaultHttpClient();
+                HttpPost httpPost = new HttpPost("http://10.10.213.203:3000/contest/get");
+
+                List<NameValuePair> nameValuePairs = new ArrayList<>(2);
+                nameValuePairs.add(new BasicNameValuePair("id" , testURL));
+                String      response = "";
+
+                try {
+                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs , "UTF-8"));
+                    ResponseHandler<String> responseHandler = new BasicResponseHandler();
+                    response = httpClient.execute(httpPost , responseHandler);
+
+                    return response;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return response;
+            }
+            @Override
+            protected void onPostExecute(String     response) {
+                progressDialog.dismiss();
+                container.removeView(getTestView);
+                container.addView(testView);
+
+                try {
+                    JSONObject  jsonResponse = new JSONObject(response);
+                    Test        mTest = new Test();
+                    mTest.title = jsonResponse.getString("header");
+                    mTest.id    = jsonResponse.getString("_id");
+                    mTest.quizs = new Quiz[jsonResponse.getJSONArray("questions").length()];
+                    for (int i = 0; i < mTest.quizs.length; i++) {
+                        mTest.quizs[i] = new Quiz(jsonResponse.getJSONArray("questions").getJSONObject(i).getString("text") ,
+                                jsonResponse.getJSONArray("questions").getJSONObject(i).getJSONArray("choices"));
+                    }
+
+                    setUpTestView(mTest);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute();
+    }
+
+    void    getQuiz(String  username) {
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                DefaultHttpClient httpClient = new DefaultHttpClient();
+                HttpPost httpPost = new HttpPost("http://10.10.213.203:3000/contest/quizz");
+
+                String      response = "";
+
+                try {
+                    ResponseHandler<String> responseHandler = new BasicResponseHandler();
+                    response = httpClient.execute(httpPost , responseHandler);
+
+                    return response;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return response;
+            }
+
+            @Override
+            protected void  onPostExecute(String response) {
+                try {
+                    JSONObject  jsonRes = new JSONObject(response);
+                    Quiz    mQuiz = new Quiz(jsonRes.getString("text"),
+                                            jsonRes.getJSONArray("choices"),
+                                            jsonRes.getJSONArray("choices"));
+
+                    setUpQuizView(mQuiz);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute();
+    }
+
     void    setUpGetTest() {
         final EditText    testUrl = (EditText) getTestView.findViewById(R.id.test_url);
         Button      getTestButton = (Button) getTestView.findViewById(R.id.get_test);
         getTestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Test    mTest = NetworkAPI.getTest(username, testUrl.getText().toString());
-                container.removeView(getTestView);
-                container.addView(testView);
-                setUpTestView(mTest);
+                getTest(username, testUrl.getText().toString());
             }
         });
     }
 
-    void    setUpTestView(Test  tTest) {
+    void    submitAnswer(final JSONArray      answer , final String   contestID) {
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                DefaultHttpClient httpClient = new DefaultHttpClient();
+                HttpPost httpPost = new HttpPost("http://10.10.213.203:3000/contest/submit");
+
+                JSONObject  jdata = new JSONObject();
+                try {
+                    jdata.put("id" , contestID);
+                    jdata.put("answers" , answer);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                String      response = "";
+
+                try {
+                    StringEntity    se = new StringEntity(jdata.toString());
+                    httpPost.setEntity(se);
+                    httpPost.addHeader("Content-type", "application/json");
+                    //httpPost.addHeader("Accept-Charset" , "UTF-8");
+                    ResponseHandler<String> responseHandler = new BasicResponseHandler();
+                    response = httpClient.execute(httpPost , responseHandler);
+
+                    return response;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return response;
+            }
+
+            @Override
+            protected   void    onPostExecute(String    response) {
+                System.out.println(response);
+                try {
+                    JSONObject  jsonRes = new JSONObject(response);
+                    TextView    resultText = (TextView) testView.findViewById(R.id.resultText);
+                    resultText.setText("Bạn làm được " + Integer.toString(jsonRes.getInt("correct")) + "/" + Integer.toString(jsonRes.getInt("total")) + " câu.");
+                    resultText.setTextColor(Color.RED);
+                    resultText.setTextSize(18);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }.execute();
+    }
+
+    void    setUpTestView(final Test  tTest) {
         TextView    testTitle = (TextView) testView.findViewById(R.id.test_title);
         testTitle.setText(tTest.title);
         TableLayout quizTable = (TableLayout) testView.findViewById(R.id.quizs);
@@ -57,6 +233,25 @@ public class MainActivity extends ActionBarActivity
             @Override
             public void onClick(View v) {
                 // send the answer sheet to be judge and display the score
+                System.out.println(answerSheet);
+                JSONArray   jsonAnswer = new JSONArray();
+                for (int i = 0; i < answerSheet.length; i++) {
+                    JSONArray   jsonRow = new JSONArray();
+                    for (int j = 0; j < tTest.quizs[i].answers.length; j++) {
+                        try {
+                            jsonRow.put(j , answerSheet[i][j]);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    try {
+                        jsonAnswer.put(i , jsonRow);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println(jsonAnswer.toString());
+                submitAnswer(jsonAnswer , tTest.id);
             }
         });
 
@@ -68,7 +263,7 @@ public class MainActivity extends ActionBarActivity
             TextView    questionTextView = (TextView) quizView.findViewById(R.id.quiz_question);
             TableLayout answerTable       = (TableLayout) quizView.findViewById(R.id.quiz_answers);
 
-            questionTextView.setText("Câu " + Integer.toString(i+1) + " : " + tTest.quizs[i].question.toString());
+            questionTextView.setText(tTest.quizs[i].question.toString());
             for (int j = 0; j < tTest.quizs[i].answers.length; j++) {
                 TableRow    answerRow   = new TableRow(this);
                 View        answerView  = getLayoutInflater().inflate(R.layout.answer_layout , null);
@@ -81,8 +276,8 @@ public class MainActivity extends ActionBarActivity
                     public void onClick(View v) {
                         // update answer sheet
                         answerSheet[finalI][finalJ] ^= true;
-                        if (answerSheet[finalI][finalJ]) answerButton.setBackgroundColor(Color.parseColor("#bbbbbb"));
-                        else answerButton.setBackgroundColor(Color.parseColor("#dddddd"));
+                        if (answerSheet[finalI][finalJ]) answerButton.setBackgroundColor(Color.parseColor("#2979ff"));
+                        else answerButton.setBackgroundColor(Color.parseColor("#e0e0e0"));
                     }
                 });
 
@@ -94,8 +289,7 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
-    void    setUpQuizView() {
-        Quiz    mQuiz = NetworkAPI.getQuiz(username);
+    void    setUpQuizView(final Quiz  mQuiz) {
         TextView    questionTextView = (TextView)       quizView.findViewById(R.id.quiz_question);
         TableLayout answerTable      = (TableLayout)    quizView.findViewById(R.id.quiz_answers);
         Button      submitButton     = (Button)         quizView.findViewById(R.id.quiz_submit);
@@ -103,22 +297,41 @@ public class MainActivity extends ActionBarActivity
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //submit quiz answer to server
+                boolean check = true;
+                for (int i = 0; i < mQuiz.answers.length; i++) {
+                    if (answerSheet[0][i] != mQuiz.result[i]) {
+                        check = false;
+                    }
+                }
+
+                TextView quizResult = (TextView) quizView.findViewById(R.id.quizResult);
+
+                if (check) {
+                    quizResult.setText("Đúng");
+                } else {
+                    quizResult.setText("Sai");
+                }
             }
         });
 
-        questionTextView.setText("Câu hỏi: " + mQuiz.question.toString());
+        questionTextView.setText(mQuiz.question.toString());
+        answerTable.removeAllViews();
 
+        answerSheet = new boolean[1][10];
         for (int i = 0; i < mQuiz.answers.length; i++) {
             TableRow    answerRow = new TableRow(this);
             View        answerView = getLayoutInflater().inflate(R.layout.answer_layout , null);
-            Button      answerButton = (Button) answerView.findViewById(R.id.button);
+            final Button      answerButton = (Button) answerView.findViewById(R.id.button);
 
             answerButton.setText((char) ('A' + i) + ". " + mQuiz.answers[i].toString());
+            final int finalI = i;
             answerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //update the answer sheet
+                    answerSheet[0][finalI] ^= true;
+                    if (answerSheet[0][finalI]) answerButton.setBackgroundColor(Color.parseColor("#2979ff"));
+                    else answerButton.setBackgroundColor(Color.parseColor("#e0e0e0"));
                 }
             });
 
@@ -171,19 +384,19 @@ public class MainActivity extends ActionBarActivity
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
-                mTitle = getString(R.string.title_section1);
                 container.removeAllViews();
                 container.addView(getTestView);
                 setUpGetTest();
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
                 container.removeAllViews();
                 container.addView(quizView);
-                setUpQuizView();
+                getQuiz(username);
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                container.removeAllViews();
+                break;
+            case 4:
                 break;
         }
     }
