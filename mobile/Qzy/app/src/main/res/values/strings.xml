@@ -2,8 +2,8 @@
     <string name="app_name">Qzy</string>
 
     <string name="title_section1">Làm bài thi</string>
-    <string name="title_section2">Làm quiz</string>
-    <string name="title_section3">Đánh giá năng lực</string>
+    <string name="title_section2">Luyện tập</string>
+    <string name="title_section3">Kết qu</string>
     <string name="title_section4">Đăng xuất</string>
     <string name="submit">Nộp bài</string>
     <string name="server">https://10.10.213.203:3000</string>
