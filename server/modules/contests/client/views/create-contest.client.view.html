@@ -1,0 +1,53 @@
+<section ng-controller="contestsController" ng-init="init()">
+  <div class="row">
+    <h2 class="col-md-6 contest-header">
+      <div id="{{header.id + '-text'}}" ng-hide="header.edit" ng-bind="header.text" ng-click="startEdit(header)">{{header.text}}</div>
+      <form ng-show="header.edit" ng-submit="finishEdit(header)">
+        <input class="form-control" id="{{header.id + '-edit'}}" type="text" ng-model="header.text" placeholder="Enter a title"/>
+      </form>
+    </h2>  
+    <div class="col-md-4">
+      <button class="btn btn-success save-btn" ng-click="save()">Save Contest</button>
+    </div>
+  </div>
+  
+  <br>
+
+  <div class="container col-md-10 questions">
+    <div ng-repeat="question in questions" class="question">
+      <div class="row">
+        <span style="color: white">____</span>
+        <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="deleteQuestion(questions, $index)"></span>  
+        <span><b>{{($index + 1).toString() + "."}}</b></span>
+        <span><b>{{question.text}}</b></span> 
+      </div>
+      <br>
+      <div class="col-md-offset-1" ng-repeat="choice in question.choices">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="deleteChoice(question, $index)"></span>  
+        <button class="btn-xs" ng-class="{'btn-success': choice.correct, 'btn-defaut': !choice.correct}" ng-click="toggleChoice(choice)"><b>{{chr[$index] + "___."}}</b></button>
+        <span class="choice">{{choice.text}}</span>
+      </div>
+      
+      
+      
+      <form class="col-md-offset-1" ng-submit="addNewChoice(question, question.currentText)">
+        <input class="form-control" id="{{question.id}}" type="text" ng-model="question.currentText" placeholder="Enter a choice"/>
+      </form>   
+      <br>
+    </div>
+
+    <form ng-submit="addNewQuestion(currentText)">
+        <input class="form-control" type="text" ng-model="currentText" placeholder="Enter a question"/>
+    </form>
+
+    <br>
+
+    <form ng-submit="addNewQuestionFromText()">
+        <textarea class="form-control" rows="5" ng-model="textSample" placeholder="Add questions from text"></textarea>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    <div class="row" style="height: 300px"></div>
+  </div>
+
+
+</section>

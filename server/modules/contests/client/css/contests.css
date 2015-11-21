@@ -1,0 +1,28 @@
+.contest-header {
+	margin-left: 20px;
+}
+
+#header-edit {
+	font-size: 24px;
+}
+
+.question {
+	background-color: #f2f2f2;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+.question {
+	font-size: 16px;
+}
+
+.correctChoice {
+	background-color: #33cc33;
+}
+
+.save-btn {
+	bottom: -20px;
+	right: -120px;
+	width: 200px;
+	position: relative;
+}

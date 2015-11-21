@@ -11,7 +11,7 @@ import 	docx, re , json
 #     newparatextlist.append(paratext.encode("utf-8"))
 # a = '\n'.join(newparatextlist)
 
-fi = open("temp.txt" , "r")
+fi = open("../temp.txt" , "r")
 a = fi.read()
 
 
@@ -87,5 +87,5 @@ while (qi < len(hits)):
 
 json_data = json.dumps(result, ensure_ascii=False , sort_keys=True, indent=4, separators=(',', ': ')).encode("utf-8")
 
-fo = open("output.txt" , "w")
+fo = open("../output.txt" , "w")
 fo.write(json_data)

@@ -1,0 +1,20 @@
+<section ng-controller="listContestsController" ng-init="find()">
+  <div class="page-header">
+    <h1> List of contests</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="contest in contests" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="contest.dateCreated | date:'mediumDate'"></span>
+        by
+        <span ng-bind="contest.creator.displayName"></span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="contest.title"></h4>
+      <p class="list-group-item-text" ng-bind="contest._id"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="!contests.length">
+    No contest
+  </div>
+</section>
