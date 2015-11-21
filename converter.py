@@ -3,36 +3,17 @@
 
 import 	docx, re , json
 
-document = docx.opendocx("temp.docx")
+# document = docx.opendocx("temp.docx")
 
-paratextlist = docx.getdocumenttext(document)
-newparatextlist = []
-for paratext in paratextlist:
-    newparatextlist.append(paratext.encode("utf-8"))
-a = '\n'.join(newparatextlist)
+# paratextlist = docx.getdocumenttext(document)
+# newparatextlist = []
+# for paratext in paratextlist:
+#     newparatextlist.append(paratext.encode("utf-8"))
+# a = '\n'.join(newparatextlist)
 
+fi = open("temp.txt" , "r")
+a = fi.read()
 
-
-# a = "Câu 1: Giới hạn quang điện của mỗi kim loại là:\
-# A. Bước sóng của ánh sáng kích thích.\
-# B. Bước sóng riêng của kim loại đó.\
-# C. Bước sóng giới hạn của ánh sáng kích thích đối với kim loại đó\
-# D. Công thoát của electron ở bề mặt kim loại đó. \
-# Câu 3: Giả sử hai hạt nhân X và Y có độ hụt khối bằng nhau và số nuclôn của hạt nhân X lớn hơn số nuclôn của hạt nhân Y thì:\
-# A. Hạt nhân Y bền vững hơn hạt nhân X.\
-# B. Hạt nhân X bền vững hơn hạt nhân Y.\
-# C. Năng lượng liên kết riêng của hai hạt nhân bằng nhau.\
-# D. Năng lượng liên kết của hạt nhân X lớn hơn năng lượng liên kết của hạt nhân Y.\
-# Câu 4: Quá trình phân rã của một chất phóng xạ:\
-# A. Phụ thuộc vào chất đó ở dạng đơn chất hay hợp chất \
-# B. Phụ thuộc vào nhiệt độ cao hay thấp\
-# C. Phụ thuộc vào chất đó ở trạng thái nào (rắn, lỏng, khí) \
-# D. Xảy ra như nhau trong mọi điều kiện\
-# Câu 5: Trong phản ứng hạt nhân:\
-# A. Tổng năng lượng được bảo toàn\
-# B. Tổng khối lượng của các hạt được bảo toàn\
-# C. Tổng số nơtron được bảo toàn \
-# D. Động năng được bảo toàn"
 
 hits = [m.start() for m in re.finditer(r"Câu\b" , a)]
 Ahits = [m.start() for m in re.finditer(r"A\." , a)]
