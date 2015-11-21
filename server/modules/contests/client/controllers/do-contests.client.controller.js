@@ -1,8 +1,8 @@
 'use strict';
 
 // contests controller
-angular.module('contests').controller('doContestsController', ['$scope', '$stateParams', '$location', '$http', 'Authentication', 'contests',
-  function ($scope, $stateParams, $location, $http, Authentication, contests) {
+angular.module('contests').controller('doContestsController', ['$scope', '$stateParams', '$location', '$http', 'Authentication', 'ContestService',
+  function ($scope, $stateParams, $location, $http, Authentication, ContestService) {
     $scope.authentication = Authentication;
     
     $scope.score = false;

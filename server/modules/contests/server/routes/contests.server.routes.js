@@ -33,8 +33,12 @@ module.exports = function (app) {
   app.route('/contest/log')
     .post(contestP.getLog);
 
-  app.get('/download', function(req, res){
+  app.route('/contest/savefile')
+    .post(contestP.saveFile)
+    .get(contestP.download);
+
+  /*app.get('/download', function(req, res){
     var file = __dirname + '/../../../../../hw.doc';
     res.download(file); // Set disposition and send it.
-  });
+  });*/
 };

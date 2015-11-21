@@ -5,7 +5,7 @@ import docx , json
 
 document = docx.Document()
 
-fi = open("input.txt" , "r")
+fi = open("../input.txt" , "r")
 
 s = fi.read()
 
@@ -33,4 +33,4 @@ for i in range(len(test)):
 
 document.add_paragraph(ss)
 
-document.save('test.docx')
+document.save('../test.docx')

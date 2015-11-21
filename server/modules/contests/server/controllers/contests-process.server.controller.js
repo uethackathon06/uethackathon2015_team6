@@ -110,6 +110,38 @@ exports.parseText = function(req, res) {
   }, 100);
 }
 
+exports.saveFile = function(req, res){
+  var fs = require('fs');
+  fs.writeFile("../input.txt", JSON.stringify(req.body), function(err) {
+      if(err) {
+          return console.log(err);
+      }
+  });   
+  setTimeout(function() {
+      var process = require("child_process").exec(
+      'python ' + '../exporter.py',
+      function (error, stdout, stderr) {
+        if (error) {
+          console.log(error.stack);
+          console.log('Error code: '+error.code);
+          console.log('Signal received: '+error.signal);
+        }
+        console.log('Child Process STDERR: '+stderr);
+      }
+    );
+
+    process.on("exit", function (code) {
+      console.log("spawnEXIT:", code);
+      res.json('ok');
+    });
+  }, 100);
+}
+
+exports.download = function(req, res){
+  var file = __dirname + '/../../../../../test.docx';
+  res.download(file);
+}
+
 exports.quizz = function(req, res){
   Contest.find({}, function(err, contests){
     //console.log(contests);
