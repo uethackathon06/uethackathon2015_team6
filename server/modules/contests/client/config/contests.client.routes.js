@@ -7,6 +7,10 @@ angular.module('contests').config(['$stateProvider',
     $stateProvider
       .state('createContest', {
         url: '/create',
+        templateUrl: 'modules/contests/client/views/blank.client.view.html'
+      })
+      .state('editContest', {
+        url: '/edit/:contestID',
         templateUrl: 'modules/contests/client/views/create-contest.client.view.html'
       })
       .state('listContest', {

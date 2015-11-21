@@ -1,9 +1,15 @@
 'use strict';
 
 // contests controller
-angular.module('contests').controller('contestsController', ['$scope', '$stateParams', '$location', 'Authentication', 'contests',
-  function ($scope, $stateParams, $location, Authentication, contests) {
+angular.module('contests').controller('contestsController', ['$scope', '$stateParams', '$location', '$http', 'Authentication', 'contests',
+  function ($scope, $stateParams, $location, $http, Authentication, contests) {
     $scope.authentication = Authentication;
+
+    if ($location.path() == '/create'){
+      $http.post('contest/create').success(function(response){
+        $location.path('/edit/'+response._id);
+      })
+    }
 
     $scope.header = {
       id: "header",
@@ -19,14 +25,36 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
       $scope.chr.push(String.fromCharCode(65 + i));
     }
     
+    $scope.init = function(){
+      var id = $location.path().slice(6);
+      console.log(id);
+      $http.post('contest/find', {id: id}).success(function(response){
+        $scope.contest = response[0];
+        $scope.header.text = response[0].header;
+        if (response[0].questions)
+          $scope.questions = response[0].questions;
+      });
+    }
+      
+    $scope.save = function(){
+      console.log($scope.contest);
+      $http.post('contest/update', {
+        contest: $scope.contest,
+        questions: $scope.questions,
+        header: $scope.header.text
+      })
+      .success(function(response){
+        console.log(response);
+      });
+    }
+
     $scope.startEdit = function(obj){
       setTimeout(function(){
         obj.edit = true;  
         $scope.$apply();
         $("#" + obj.id + "-edit").trigger('select');
       }, 100);
-      //$("#" + obj.id + "-edit").trigger('select');
-    }
+    };
 
     $scope.finishEdit = function(obj, callback, callbackArg){
       obj.edit = false;
@@ -48,11 +76,11 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
       setTimeout(function(){
         $("#" + id).trigger('select');
       }, 100);
-    }
+    };
 
     $scope.deleteQuestion = function(questions, index){
       questions.splice(index, 1);
-    }
+    };
 
     $scope.addNewChoice = function(obj, text){
       var id = String.fromCharCode(65 + obj.choices.length);
@@ -63,15 +91,15 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
         correct: false
       });
       obj.currentText = "";
-    }
+    };
 
     $scope.deleteChoice = function(question, index){
       question.choices.splice(index, 1);
-    }
+    };
 
     $scope.toggleChoice = function(choice){
       choice.correct = !choice.correct;
-    }
+    };
     // Create new Contest
     /*$scope.create = function (isValid) {
       $scope.error = null;

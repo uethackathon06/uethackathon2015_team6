@@ -1,11 +1,14 @@
-<section ng-controller="contestsController">
+<section ng-controller="contestsController" ng-init="init()">
   <div class="row">
-    <h2 class="col-md-6">
+    <h2 class="col-md-6 contest-header">
       <div id="{{header.id + '-text'}}" ng-hide="header.edit" ng-bind="header.text" ng-click="startEdit(header)">{{header.text}}</div>
       <form ng-show="header.edit" ng-submit="finishEdit(header)">
-        <input class="form-control" id="{{header.id + '-edit'}}" type="text" ng-model="header.text" placeholder="Enter title"/>
+        <input class="form-control" id="{{header.id + '-edit'}}" type="text" ng-model="header.text" placeholder="Enter a title"/>
       </form>
     </h2>  
+    <div class="col-md-4">
+      <button class="btn btn-success save-btn" ng-click="save()">Save Contest</button>
+    </div>
   </div>
   
   <br>
@@ -28,13 +31,13 @@
       
       
       <form class="col-md-offset-1" ng-submit="addNewChoice(question, question.currentText)">
-        <input class="form-control" id="{{question.id}}" type="text" ng-model="question.currentText" placeholder="Enter choice"/>
+        <input class="form-control" id="{{question.id}}" type="text" ng-model="question.currentText" placeholder="Enter a choice"/>
       </form>   
       <br>
     </div>
 
     <form ng-submit="addNewQuestion(currentText)">
-        <input class="form-control" type="text" ng-model="currentText" placeholder="Enter question"/>
+        <input class="form-control" type="text" ng-model="currentText" placeholder="Enter a question"/>
     </form>
 
     <br>

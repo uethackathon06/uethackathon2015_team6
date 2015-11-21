@@ -1,5 +1,5 @@
 .contest-header {
-	height: 70px;
+	margin-left: 20px;
 }
 
 #header-edit {
@@ -18,4 +18,11 @@
 
 .correctChoice {
 	background-color: #33cc33;
+}
+
+.save-btn {
+	bottom: -20px;
+	right: -120px;
+	width: 200px;
+	position: relative;
 }
