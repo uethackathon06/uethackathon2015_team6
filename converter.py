@@ -1,37 +1,38 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import 	docx, re
+import 	docx, re , json
 
-# document = docx.opendocx("temp.docx")
+document = docx.opendocx("temp.docx")
 
-# paratextlist = docx.getdocumenttext(document)
-# newparatextlist = []
-# for paratext in paratextlist:
-#     newparatextlist.append(paratext.encode("utf-8"))
-# print '\n\n'.join(newparatextlist)
+paratextlist = docx.getdocumenttext(document)
+newparatextlist = []
+for paratext in paratextlist:
+    newparatextlist.append(paratext.encode("utf-8"))
+a = '\n'.join(newparatextlist)
 
 
-a = "Câu 1: Giới hạn quang điện của mỗi kim loại là:\
-A. Bước sóng của ánh sáng kích thích.\
-B. Bước sóng riêng của kim loại đó.\
-C. Bước sóng giới hạn của ánh sáng kích thích đối với kim loại đó\
-D. Công thoát của electron ở bề mặt kim loại đó. \
-Câu 3: Giả sử hai hạt nhân X và Y có độ hụt khối bằng nhau và số nuclôn của hạt nhân X lớn hơn số nuclôn của hạt nhân Y thì:\
-A. Hạt nhân Y bền vững hơn hạt nhân X.\
-B. Hạt nhân X bền vững hơn hạt nhân Y.\
-C. Năng lượng liên kết riêng của hai hạt nhân bằng nhau.\
-D. Năng lượng liên kết của hạt nhân X lớn hơn năng lượng liên kết của hạt nhân Y.\
-Câu 4: Quá trình phân rã của một chất phóng xạ:\
-A. Phụ thuộc vào chất đó ở dạng đơn chất hay hợp chất \
-B. Phụ thuộc vào nhiệt độ cao hay thấp\
-C. Phụ thuộc vào chất đó ở trạng thái nào (rắn, lỏng, khí) \
-D. Xảy ra như nhau trong mọi điều kiện\
-Câu 5: Trong phản ứng hạt nhân:\
-A. Tổng năng lượng được bảo toàn\
-B. Tổng khối lượng của các hạt được bảo toàn\
-C. Tổng số nơtron được bảo toàn \
-D. Động năng được bảo toàn"
+
+# a = "Câu 1: Giới hạn quang điện của mỗi kim loại là:\
+# A. Bước sóng của ánh sáng kích thích.\
+# B. Bước sóng riêng của kim loại đó.\
+# C. Bước sóng giới hạn của ánh sáng kích thích đối với kim loại đó\
+# D. Công thoát của electron ở bề mặt kim loại đó. \
+# Câu 3: Giả sử hai hạt nhân X và Y có độ hụt khối bằng nhau và số nuclôn của hạt nhân X lớn hơn số nuclôn của hạt nhân Y thì:\
+# A. Hạt nhân Y bền vững hơn hạt nhân X.\
+# B. Hạt nhân X bền vững hơn hạt nhân Y.\
+# C. Năng lượng liên kết riêng của hai hạt nhân bằng nhau.\
+# D. Năng lượng liên kết của hạt nhân X lớn hơn năng lượng liên kết của hạt nhân Y.\
+# Câu 4: Quá trình phân rã của một chất phóng xạ:\
+# A. Phụ thuộc vào chất đó ở dạng đơn chất hay hợp chất \
+# B. Phụ thuộc vào nhiệt độ cao hay thấp\
+# C. Phụ thuộc vào chất đó ở trạng thái nào (rắn, lỏng, khí) \
+# D. Xảy ra như nhau trong mọi điều kiện\
+# Câu 5: Trong phản ứng hạt nhân:\
+# A. Tổng năng lượng được bảo toàn\
+# B. Tổng khối lượng của các hạt được bảo toàn\
+# C. Tổng số nơtron được bảo toàn \
+# D. Động năng được bảo toàn"
 
 hits = [m.start() for m in re.finditer(r"Câu\b" , a)]
 Ahits = [m.start() for m in re.finditer(r"A\." , a)]
@@ -48,6 +49,7 @@ Aanswer = []
 Banswer = []
 Canswer = []
 Danswer = []
+result = []
 
 while (qi < len(hits)):
 	while (hits[qi] >= Ahits[ai]):
@@ -82,10 +84,13 @@ while (qi < len(hits)):
 	if (di == len(Dhits)):
 		break;
 
-	print a[hits[qi]:Ahits[ai]].decode("utf-8") + '\n'
-	print a[Ahits[ai]:Bhits[bi]].decode("utf-8") + '\n'
-	print a[Bhits[bi]:Chits[ci]].decode("utf-8") + '\n'
-	print a[Chits[ci]:Dhits[di]].decode("utf-8") + '\n'
+	tres = {}
+
+	tres["question"] =  a[hits[qi]:Ahits[ai]].decode("utf-8")
+	tres["answer"] = []
+	tres["answer"].append(a[Ahits[ai]+2:Bhits[bi]].decode("utf-8"))
+	tres["answer"].append(a[Bhits[bi]+2:Chits[ci]].decode("utf-8"))
+	tres["answer"].append(a[Chits[ci]+2:Dhits[di]].decode("utf-8"))
 	
 	while (Dhits[di] >= hits[qi]):
 		qi+=1
@@ -93,7 +98,13 @@ while (qi < len(hits)):
 			break;
 
 	if (qi == len(hits)):
-		print a[Dhits[di]:len(a)].decode("utf-8") + '\n'
+		tres["answer"].append(a[Dhits[di]+2:len(a)].decode("utf-8"))
 	else:
-		print a[Dhits[di]:hits[qi]].decode("utf-8") + '\n'
+		tres["answer"].append(a[Dhits[di]+2:hits[qi]].decode("utf-8"))
 
+	result.append(tres)
+
+json_data = json.dumps(result, ensure_ascii=False , sort_keys=True, indent=4, separators=(',', ': ')).encode("utf-8")
+
+fo = open("output.txt" , "w")
+fo.write(json_data)
