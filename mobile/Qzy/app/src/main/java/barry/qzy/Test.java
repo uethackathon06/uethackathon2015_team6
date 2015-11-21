@@ -9,6 +9,6 @@ public class Test {
     Date    testBegin, testEnd;
     Quiz[]  quizs;
     String  title;
-
+    String  id;
 
 }
