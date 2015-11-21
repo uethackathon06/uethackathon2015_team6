@@ -55,6 +55,26 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
       })
       .success(function(response){
         console.log(response);
+        for(var i = 0; i < response.length; i++){
+          var id = ($scope.questions.length + 1).toString();
+          var question = {
+            id: id,
+            edit: false,
+            text: response[i].question,
+            currentText: "",
+            choices: []
+          };
+          
+          for(var j = 0; j < response[i].answer.length; j++){
+            question.choices.push({
+              edit: true,
+              text: response[i].answer[j],
+              correct: false
+            })
+          }
+
+          $scope.questions.push(question);
+        }
       }); 
     }
 

@@ -55,6 +55,11 @@ exports.update = function (req, res) {
 exports.parseText = function(req, res) {
   var fs = require('fs');
 
+  fs.writeFile("../temp.txt", req.body.text, function(err) {
+      if(err) {
+          return console.log(err);
+      }
+  }); 
 
   setTimeout(function() {
       var process = require("child_process").exec(
@@ -73,5 +78,11 @@ exports.parseText = function(req, res) {
     process.on("exit", function (code) {
       console.log("spawnEXIT:", code)
     });
-  }, 500);
+  }, 100);
+
+  setTimeout(function() {
+    var obj = JSON.parse(fs.readFileSync('../output.txt', 'utf8'));
+    res.json(obj);
+  }, 100);
+  
 }
