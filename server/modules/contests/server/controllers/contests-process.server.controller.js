@@ -12,7 +12,7 @@ exports.mark = function(req, res){
   var mark = function(questions, answers){
     var total = questions.length;
     var correct = 0;
-    console.log(answers);
+    //console.log(answers);
     for(var i = 0; i < questions.length; i++){
       var flag = true;
       for(var j = 0; j < questions[i].choices.length; j++)
@@ -24,7 +24,7 @@ exports.mark = function(req, res){
 
     return {correct: correct, total: total};
   }
-
+  console.log(req.body);
   Contest.findOne({_id: req.body.id}, function(err, contest){
     if (err || !contest){
       res.json("Contest not exists");
@@ -42,14 +42,14 @@ exports.mark = function(req, res){
 exports.getcontest = function(req, res){
   //console.log(req.body);
   Contest.findOne({_id: req.body.id}, function(err, contest){
-    if (err || !contest){
+    if (err || !contest || !contest.questions){
       res.json("Contest not exists");
       return;
     }
     contest = contest.toObject();
     for(var i = 0; i < contest.questions.length; i++){
       for(var j = 0; j < contest.questions[i].choices.length; j++){
-        delete contest.questions[i].choices[j].correct;
+        contest.questions[i].choices[j].correct = false;
       }
     }
     res.json(contest);
@@ -75,7 +75,6 @@ exports.parseText = function(req, res) {
           console.log('Signal received: '+error.signal);
         }
         console.log('Child Process STDERR: '+stderr);
-        res.json(stdout);
       }
     );
 
@@ -88,5 +87,22 @@ exports.parseText = function(req, res) {
     var obj = JSON.parse(fs.readFileSync('../output.txt', 'utf8'));
     res.json(obj);
   }, 100);
-  
 }
+
+exports.quizz = function(req, res){
+  Contest.find({}, function(err, contests){
+    //console.log(contests);
+    var arr = [];
+    for(var i = 0; i < contests.length; i++){
+      if (!err && contests[i] && contests[i].questions){
+        //console.log(contests[i].questions);
+        for(var j = 0; j < contests[i].questions.length; j++){
+          arr.push(contests[i].questions[j]);
+        }
+      }  
+    }
+    //console.log(arr);
+    res.json(arr[Math.floor((Math.random() * arr.length) + 1)]);
+  });
+}
+

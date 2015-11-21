@@ -26,4 +26,7 @@ module.exports = function (app) {
 
   app.route('/contest/submit')
     .post(contestP.mark);
+
+  app.route('/contest/quizz')
+    .post(contestP.quizz);
 };

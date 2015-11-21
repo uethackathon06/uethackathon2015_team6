@@ -22,7 +22,38 @@
 
 .save-btn {
 	bottom: -20px;
-	right: -120px;
+	right: -95px;
 	width: 200px;
 	position: relative;
+}
+
+.student-submit {
+	width: 200px;
+}
+
+.score {
+	font-size: 20px;
+	color: red;
+	position: relative;
+	right: -180px;
+	bottom: -40px;
+}	
+
+.control-icon{
+	position: relative;
+	right: -1000px;
+	bottom: -50px;
+}
+
+.contest-date {
+	position: relative;
+	bottom: 40px;
+}
+
+.choice-input {
+	width: 500px;
+}
+
+.question-input {
+	width: 850px;	
 }
