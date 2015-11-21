@@ -81,8 +81,8 @@ public class MainActivity extends ActionBarActivity
                     public void onClick(View v) {
                         // update answer sheet
                         answerSheet[finalI][finalJ] ^= true;
-                        if (answerSheet[finalI][finalJ]) answerButton.setBackgroundColor(Color.parseColor("#bbbbbb"));
-                        else answerButton.setBackgroundColor(Color.parseColor("#dddddd"));
+                        if (answerSheet[finalI][finalJ]) answerButton.setBackgroundColor(Color.parseColor("#2979ff"));
+                        else answerButton.setBackgroundColor(Color.parseColor("#e0e0e0"));
                     }
                 });
 
@@ -108,17 +108,23 @@ public class MainActivity extends ActionBarActivity
         });
 
         questionTextView.setText("Câu hỏi: " + mQuiz.question.toString());
+        answerTable.removeAllViews();
 
+        answerSheet = new boolean[1][10];
         for (int i = 0; i < mQuiz.answers.length; i++) {
             TableRow    answerRow = new TableRow(this);
             View        answerView = getLayoutInflater().inflate(R.layout.answer_layout , null);
-            Button      answerButton = (Button) answerView.findViewById(R.id.button);
+            final Button      answerButton = (Button) answerView.findViewById(R.id.button);
 
             answerButton.setText((char) ('A' + i) + ". " + mQuiz.answers[i].toString());
+            final int finalI = i;
             answerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //update the answer sheet
+                    answerSheet[0][finalI] ^= true;
+                    if (answerSheet[0][finalI]) answerButton.setBackgroundColor(Color.parseColor("#2979ff"));
+                    else answerButton.setBackgroundColor(Color.parseColor("#e0e0e0"));
                 }
             });
 
@@ -171,19 +177,19 @@ public class MainActivity extends ActionBarActivity
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
-                mTitle = getString(R.string.title_section1);
                 container.removeAllViews();
                 container.addView(getTestView);
                 setUpGetTest();
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
                 container.removeAllViews();
                 container.addView(quizView);
                 setUpQuizView();
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                container.removeAllViews();
+                break;
+            case 4:
                 break;
         }
     }
