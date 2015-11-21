@@ -1,8 +1,8 @@
 'use strict';
 
 // contests controller
-angular.module('contests').controller('logContestsController', ['$scope', '$stateParams', '$location', '$http', 'Authentication', 'contests',
-  function ($scope, $stateParams, $location, $http, Authentication, contests) {
+angular.module('contests').controller('logContestsController', ['$scope', '$stateParams', '$location', '$http', 'Authentication',
+  function ($scope, $stateParams, $location, $http, Authentication) {
     $scope.authentication = Authentication;
     
     $scope.selected;

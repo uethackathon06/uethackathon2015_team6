@@ -1,8 +1,8 @@
 'use strict';
 
 // contests controller
-angular.module('contests').controller('listContestsController', ['$scope', '$timeout', '$location', '$http', 'Authentication', 'contests',
-  function ($scope, $timeout, $location, $http, Authentication, contests) {
+angular.module('contests').controller('listContestsController', ['$scope', '$timeout', '$location', '$http', 'Authentication',
+  function ($scope, $timeout, $location, $http, Authentication) {
     $scope.authentication = Authentication;
     $scope.contests = [];
 
