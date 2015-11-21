@@ -9,6 +9,7 @@ import org.json.JSONException;
 public class Quiz {
     String      question;
     String[]    answers;
+    boolean[]   result;
 
     Quiz() {
         question = "?";
@@ -25,6 +26,20 @@ public class Quiz {
         for (int i = 0; i < tAnswers.length(); i++) {
             try {
                 answers[i] = tAnswers.getJSONObject(i).getString("text");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    Quiz(String     tQuestion , JSONArray tAnswers , JSONArray  tAnswer2) {
+        question = tQuestion;
+        answers = new String[tAnswers.length()];
+        result = new boolean[tAnswers.length()];
+        for (int i = 0; i < tAnswers.length(); i++) {
+            try {
+                answers[i] = tAnswers.getJSONObject(i).getString("text");
+                result[i] = tAnswer2.getJSONObject(i).getBoolean("correct");
             } catch (JSONException e) {
                 e.printStackTrace();
             }

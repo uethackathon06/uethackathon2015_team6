@@ -115,8 +115,45 @@ public class MainActivity extends ActionBarActivity
         }.execute();
     }
 
-    Quiz    getQuiz(String  username) {
-        return new Quiz();
+    void    getQuiz(String  username) {
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                DefaultHttpClient httpClient = new DefaultHttpClient();
+                HttpPost httpPost = new HttpPost("http://10.10.213.203:3000/contest/quizz");
+
+                String      response = "";
+
+                try {
+                    ResponseHandler<String> responseHandler = new BasicResponseHandler();
+                    response = httpClient.execute(httpPost , responseHandler);
+
+                    return response;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return response;
+            }
+
+            @Override
+            protected void  onPostExecute(String response) {
+                try {
+                    JSONObject  jsonRes = new JSONObject(response);
+                    Quiz    mQuiz = new Quiz(jsonRes.getString("text"),
+                                            jsonRes.getJSONArray("choices"),
+                                            jsonRes.getJSONArray("choices"));
+
+                    setUpQuizView(mQuiz);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute();
     }
 
     void    setUpGetTest() {
@@ -252,8 +289,7 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
-    void    setUpQuizView() {
-        Quiz    mQuiz = getQuiz(username);
+    void    setUpQuizView(final Quiz  mQuiz) {
         TextView    questionTextView = (TextView)       quizView.findViewById(R.id.quiz_question);
         TableLayout answerTable      = (TableLayout)    quizView.findViewById(R.id.quiz_answers);
         Button      submitButton     = (Button)         quizView.findViewById(R.id.quiz_submit);
@@ -261,7 +297,20 @@ public class MainActivity extends ActionBarActivity
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //submit quiz answer to server
+                boolean check = true;
+                for (int i = 0; i < mQuiz.answers.length; i++) {
+                    if (answerSheet[0][i] != mQuiz.result[i]) {
+                        check = false;
+                    }
+                }
+
+                TextView quizResult = (TextView) quizView.findViewById(R.id.quizResult);
+
+                if (check) {
+                    quizResult.setText("Đúng");
+                } else {
+                    quizResult.setText("Sai");
+                }
             }
         });
 
@@ -342,7 +391,7 @@ public class MainActivity extends ActionBarActivity
             case 2:
                 container.removeAllViews();
                 container.addView(quizView);
-                setUpQuizView();
+                getQuiz(username);
                 break;
             case 3:
                 container.removeAllViews();
