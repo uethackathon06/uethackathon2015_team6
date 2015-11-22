@@ -14,7 +14,7 @@
 	<div class="container col-md-4 detail-ctn" ng-show="selected">
 		<h2 class="page-header" style = "border-bottom: 5px solid white">Answers<h2>
 		<h4 ng-repeat="question in selected.questions" class="col-md-4" class="answer-detail">
-			<span class="label" style="float: left; width: 100px" ng-class="{'label-success': question.correct, 'label-danger': !question.correct}">{{$index}}</span>
+			<span class="label" style="float: left; width: 100px" ng-class="{'label-success': question.correct, 'label-danger': !question.correct}">{{$index+1}}</span>
 		</h4>
 	</div>
 

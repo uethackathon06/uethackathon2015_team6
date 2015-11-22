@@ -5,6 +5,9 @@ angular.module('contests').controller('listContestsController', ['$scope', '$tim
   function ($scope, $timeout, $location, $http, Authentication) {
     $scope.authentication = Authentication;
     $scope.contests = [];
+    //console.log($scope.authentication);
+
+    $scope.isAdmin = $.inArray('admin', Authentication.user.roles) > -1;
 
     $scope.find = function(){
     	console.log(11);
@@ -13,6 +16,16 @@ angular.module('contests').controller('listContestsController', ['$scope', '$tim
 	            $scope.contests = response;
 	        }, 100);     
 	    });	
+    }
+
+    $scope.del = function(index){
+      //console.log(index);
+      var id = $scope.contests[index]._id;
+      $scope.contests.splice(index,1);
+      $http.post('contest/remove',{id: id})
+      .success(function(response){
+        console.log(response);
+      })
     }
     
     

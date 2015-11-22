@@ -51,3 +51,10 @@ exports.update = function (req, res) {
       console.log(err);
   });
 };
+
+exports.remove = function (req, res) {
+  Contest.remove({_id: req.body.id}, function (err, response) {
+    if (!err)
+      res.json(response);
+  });
+};

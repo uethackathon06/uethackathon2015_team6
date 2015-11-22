@@ -1,71 +1,91 @@
-Chương I: Cơ chế di truyền và Biến dị
+I. ĐẠI CƯƠNG VỀ HÓA HỌC HỮU CƠ
 
-Câu 1. Cơ sở vật chất của hiện tượng di truyền ở cấp độ phân tử là:
+Câu 1. Hợp chất hữu cơ là hợp chất của cacbon
+A. với hiđro.
+B. với oxi.
+C. với hiđro, oxi và nhiều nguyên tố khác.
+D. trừ CO, CO2, muối cacbonat, xianua,...
 
-A. Protein
-B. ARN
-C. Axit nucleic
-D. ADN
+Câu 2. Theo thành phần nguyên tố, hợp chất hữu cơ được chia thành
+A. hiđrocacbon và các chất không phải hiđrocacbon.
+B. hiđrocacbon và các hợp chất chứa oxi.
+C. hiđrocacbon và dẫn xuất của hiđrocacbon.
+D. hiđrocacbon và các hợp chất có nhóm chức.
 
-Câu 2. Trong tế bào sinh dưỡng của cơ thể lưỡng bội gen thường tồn tại thành từng cặp alen. Nguyên nhân vì:
+Câu 3. Trong thành phần phân tử chất hữu cơ nhất thiết phải có
+A. nguyên tố cacbon và hiđro.
+B. nguyên tố cacbon.
+C. nguyên tố cacbon, hiđro và oxi.
+D. nguyên tố cacbon và nitơ.
 
-A. Trong mọi tế bào, gen luôn tồn tại theo cặp alen (AA, Aa...)
-B. Ở tế bào sinh dưỡng, NST thường tồn tại theo từng cặp tương đồng
-C. Tồn tại theo cặp alen giúp các gen hoạt động tốt hơn
-D. Các gen luôn được sắp xếp theo từng cặp.
+Câu 4. Các chất hữu cơ có điểm nào sau đây chung?
+A. Tan tốt trong nước.
+B. Bền với nhiệt.
+C. Khả năng phản ứng cao.
+D. Dễ bay hơi.
 
-Câu 3. Người ta dựa vào đặc điểm nào sau đây để chia 3 loại ARN là mARN, tARN, rARN?
+Câu 5. Liên kết hoá học trong phân tử chất hữu cơ
+A. chủ yếu là liên kết cộng hoá trị.
+B. chủ yếu là liên kết ion.
+C. chủ yếu là liên kết cho nhận.
+D. chỉ gồm các liên kết cộng hoá trị.
 
-A. Cấu hình không gian
-B. Số loại đơn phân
-C. Khối lượng và kích thước
-D. Chức năng của mỗi loại
+Câu 6. Các chất hữu cơ có điểm chung là
+A. phân tử luôn có cacbon, hiđro và oxi.
+B. nhiệt độ nóng chảy cao.
+C. khả năng phản ứng cao.
+D. phân tử luôn có cacbon.
 
-Câu 4. Những mô tả nào sau đây về NST giới tính là đúng?
+Câu 7. Phản ứng hoá học của các chất hữu cơ thường
+A. xảy ra nhanh và tạo ra hỗn hợp sản phẩm.
+B. xảy ra chậm và tạo ra một sản phẩm duy nhất.
+C. xảy ra chậm và tạo ra hỗn hợp sản phẩm.
+D. xảy ra chậm và tạo ra hỗn hợp sản phẩm đồng phân của nhau.
 
-A. Ở đa số động vật, NST giới tính gồm có 1 cặp, khác nhau ở 2 giới
-B. NST giới tính chỉ gồm 1 cặp NST đồng dạng, khác nhau ở 2 giới
-C. Ở động vật, con cái mang cặp NST giới tính XX, con đực mang cặp NST giới tinh XY.
-D. NST giới tính chỉ có trong các tế bào sinh dục.
+Câu 8. Các chất hữu cơ có điểm chung là
+A. phân tử luôn có cacbon, hiđro và oxi.
+B. nhiệt độ nóng chảy cao.
+C. khả năng phản ứng chậm và không theo một hướng xác định.
+D. phân tử luôn có cacbon, nitơ và hiđro.
 
-Câu 5. Protein là
+Câu 9. Nhóm chất nào dưới đây đều là dẫn xuất của hiđrocacbon ?
+A. CH2Cl2, CH2Br–CH2Br, NaCl, CH3Br, CH3CH2Br.
+B. CH2Cl2, CH2Br–CH2Br, CH2=CHCOOH, CH3Br, CH3CH2OH.
+C. FeCl2, CH2Br–CH2Br, CH2=CHCl, CH3Br, CH3CH2Br.
+D. Hg2Cl2, CH2Br–CH2Br, CH2=CHCl, Na2SO4, CH3CH2Br.
 
-A. Một nhóm gen ở trên 1 đoạn ADN có liên quan về chức năng, có chung một cơ chế điều hòa
-B. Một đoạn phân tử ADN có một chức năng nhất định trong quá trình điều hòa
-C. Một đoạn phân tử axit nucleic có chức năng điều hòa hoạt động của gen cấu trúc
-D. Một tập hợp gồm các gen cấu trúc và gen điều hòa nằm cạnh nhau
+Câu 10. Mục đích của phân tích định tính là
+A. tìm công thức phân tử của chất hữu cơ.
+B. tìm công thức đơn giản nhất của chất hữu cơ.
+C. xác định phân tử khối của chất hữu cơ.
+D. xác định các nguyên tố trong phân tử chất hữu cơ.
 
-Câu 6: Giả sử một gen của vi khuẩn có số nucleotit là 3000. Hỏi số axit amin trong phân tử protein có cấu trúc bậc 1 được tổng hợp từ gen trên là bao nhiêu?
+Câu 11. Mục đích của phân tích định lượng là
+A. tìm công thức phân tử của chất hữu cơ.
+B. xác định thành phần phần trăm khối lượng các nguyên tố trong phân tử chất hữu cơ.
+C. xác định phân tử khối của chất hữu cơ.
+D. xác định các nguyên tố trong phân tử chất hữu cơ.
 
-A. 500
-B. 499
-C. 498
-D. 750
+Câu 12. Công thức đơn giản nhất cho biết
+A. số nguyên tử của các nguyên tố trong phân tử.
+B. tỉ lệ tối giản về số nguyên tử của các nguyên tố trong phân tử.
+C. phân tử khối của chất hữu cơ.
+D. thứ tự liên kết giữâ các nguyên tử trong phân tử.
 
-Câu 7. Quá trình hoạt hóa aa có vai trò
+Câu 13. Công thức phân tử cho biết
+A. số nguyên tử của các nguyên tố trong phân tử.
+B. tỉ lệ tối giản về số nguyên tử của các nguyên tố trong phân tử.
+C. phân tử Khối của chất hữu cơ.
+D. thứ tự liên kết giữâ các nguyên tử trong phân tử.
 
-A. Gắn aa vào tARN tương ứng nhờ enzim đặc hiệu.
-B. Gắn aa vào tARN nhờ enzim nổi ligaza.
-C. Kích hoạt aa và gắn nó vào tARN
-D. Sử dụng năng lượng ATP để kích hoạt aa
+Câu 14. Khi đốt cháy chất hữu cơ X bằng oxi không khí thu được hỗn hợp khí và hơi gồm CO2, H2O, N2. Điều đó chứng tỏ:
+A. Phân tử chất X chắc chắn phải có các nguyên tố C, H, O, N.
+B. Phân tử chất X chắc chắn phải có các nguyên tố C, H, có thể có các nguyên tố O, N.
+C. Phân tử chất X chỉ có các nguyên tố C, H.
+D. Phân tử chất X chắc chắn phải có các nguyên tố C, H, O.
 
-Câu 8: Loại ARN nào mang bộ ba đối mã?
-
-A. mARN
-B. tARN
-C. rARN
-D. ARN của virut
-
-Câu 9. Điều nào không đúng với ưu điểm của thể đa bội với thể lưỡng bội?
-
-A. Cơ quan sinh dưỡng lớn hơn
-B. Độ hữu thụ lớn hơn
-C. Phát triển khỏe hơn
-D. Có sức chống chịu tốt hơn
-
-Câu 10. Điểm khác nhau cơ bản giữa gen cấu trúc và gen điều hòa là:
-
-A. Về cấu trúc gen
-B. Về chức năng của Protein do gen tổng hợp
-C. Về khả năng phiên mã của gen
-D. Về vị trí phân bố của gen.
+Câu 15. Kết luận nào sau đây đúng?
+A. Các chất có cùng công thức đơn giản nhất sẽ có cùng công thức phân tử.
+B. Nhiều chất khác nhau có công thức đơn giản nhất giống nhau.
+C. Các chất khác nhau có thể có cùng công thức đơn giản nhất nhưng sẽ có công thức phân tử khác nhau.
+D. Các chất đồng phân của nhau sẽ có công thức đơn giản nhất khác nhau

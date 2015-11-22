@@ -26,9 +26,28 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
       $scope.chr.push(String.fromCharCode(65 + i));
     }
     
+    //date control
+    $(document).ready(function(){
+    $(function () {
+      $('#startDate').attr('readonly', 'readonly')
+      $('#startDate').datetimepicker();
+      $('#endDate').attr('readonly', 'readonly')
+      $('#endDate').datetimepicker();
+      $("#startDate").on("dp.change",function (e) {
+            $('#endDate').data("DateTimePicker").setMinDate(e.date);
+            $scope.contest.dateStart = new Date($("#startDate").val());
+      });
+      $("#endDate").on("dp.change",function (e) {
+            $('#startDate').data("DateTimePicker").setMaxDate(e.date);
+            $scope.contest.dateEnd = new Date($("#endDate").val());
+      });
+    });  
+    })
+
+
     $scope.init = function(){
       var id = $location.path().slice(6);
-      console.log(id);
+      
       $http.post('contest/find', {id: id}).success(function(response){
         $scope.contest = response[0];
         $scope.header.text = response[0].header;
@@ -42,7 +61,18 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
           for(var j = 0; j < choices.length; j ++)
             choices[j].edit = false;
         }
+
+        if ($scope.contest.setTime){
+          var dateStart = new Date($scope.contest.dateStart),
+              dateEnd = new Date($scope.contest.dateEnd);
+          
+          $('#startDate').data('DateTimePicker').setDate(dateStart);
+          $('#endDate').data('DateTimePicker').setDate(dateEnd);
+
+        }
       });
+
+
     }
       
     $scope.save = function(){
@@ -75,7 +105,7 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
           
           for(var j = 0; j < response[i].answer.length; j++){
             question.choices.push({
-              edit: true,
+              edit: false,
               text: response[i].answer[j],
               correct: false
             })
@@ -125,7 +155,7 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
       var id = String.fromCharCode(65 + obj.choices.length);
       console.log(id);
       obj.choices.push({
-        edit: true,
+        edit: false,
         text: text,
         correct: false
       });
@@ -150,9 +180,10 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
     }
 
     $scope.shuffle = function(){
-      var newObject = jQuery.extend(true, {}, oldObject);
-      //console.log(ContestService.randomPermutation(15));
-      ContestService.createShuffle([1,4,5,2,7],[4,3,2,1,0]);
+      //var newObject = jQuery.extend(true, {}, oldObject);
+      var shuffle = ContestService.createShuffle($scope.questions);
+      $scope.questions = shuffle.arr;
+      console.log($scope.questions);
     }
   }
 ]);

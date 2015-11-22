@@ -18,6 +18,9 @@ module.exports = function (app) {
   app.route('/contest/update')
     .post(contest.update);
 
+  app.route('/contest/remove')
+    .post(contest.remove);
+
   app.route('/contest/parsetext')
     .post(contestP.parseText);
 

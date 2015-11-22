@@ -10,7 +10,8 @@ angular.module('contests').run(['Menus',
 
     Menus.addMenuItem('topbar', {
       title: 'Create contests',
-      state: 'createContest'
+      state: 'createContest',
+      roles: ['admin']
     });
     
   }

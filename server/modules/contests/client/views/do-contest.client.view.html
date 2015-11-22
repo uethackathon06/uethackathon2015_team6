@@ -10,6 +10,10 @@
   
   <br>
 
+  <div class="alert alert-danger" ng-show="available !='ok'">
+    {{available}}
+  </div>
+
   <div class="container col-md-10 questions">
     <div ng-repeat="question in questions" class="question">
       <div class="row">
@@ -27,7 +31,7 @@
 
     <br>
 
-    <button class="btn-lg btn-success" ng-click="submit()">Submit</button>
+    <button ng-show="available === 'ok'" class="btn-lg btn-success" ng-click="submit()">Submit</button>
     <div class="row" style="height: 300px"></div>
   </div>
 
