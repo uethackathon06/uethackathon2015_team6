@@ -5,18 +5,18 @@
   <div class="list-group">
     <div ng-repeat="contest in contests" class="list-group-item" 
       href="{{'/do/' + contest._id}}">
-      <div class="control-icon">
-        <a class="btn btn-primary" href="{{'/edit/' + contest._id}}">
+      <div class="control-icon" ng-show="isAdmin">
+        <a class="btn btn-primary" href="{{'/log/' + contest._id}}">
           <i class="glyphicon glyphicon-list-alt"></i>
         </a>
         <a class="btn btn-primary" href="{{'/edit/' + contest._id}}">
           <i class="glyphicon glyphicon-edit"></i>
         </a>
-        <a class="btn btn-primary">
+        <a class="btn btn-primary" ng-click="del($index)">
           <i class="glyphicon glyphicon-trash"></i>
         </a>
       </div>
-      <small class="list-group-item-text contest-date">
+      <small class="list-group-item-text" ng-class = "{'contest-date': isAdmin}">
         <span ng-bind="contest.dateCreated | date:'mediumDate'"></span>
         by
         <span ng-bind="contest.creator.displayName"></span>
@@ -24,9 +24,13 @@
       <a href="{{'/do/' + contest._id}}"><h3 class="list-group-item-heading" ng-bind="contest.header"></h3></a>
       <span class="list-group-item-text">ID: </span>
       <span class="list-group-item-text" ng-bind="contest._id"></span>
+      <span ng-show="dateTip[$index].status" class="col-md-offset-1" style="{{'color: ' + dateTip[$index].status}}">
+        {{dateTip[$index].text}}
+      </span>
     </div>
   </div>
   <div class="alert alert-warning text-center" ng-if="!contests.length">
     No contest
   </div>
+
 </section>

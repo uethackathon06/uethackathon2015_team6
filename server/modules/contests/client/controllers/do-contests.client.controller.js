@@ -26,6 +26,29 @@ angular.module('contests').controller('doContestsController', ['$scope', '$state
         $scope.header.text = response.header;
         if (response.questions)
           $scope.questions = response.questions;
+
+        if (response.setTime){
+          var date = new Date().getTime(),
+              dateStart = new Date(response.dateStart).getTime(),
+              dateEnd = new Date(response.dateEnd).getTime();
+          
+          if (date < dateStart)
+            $scope.available = 'Contest has not started';
+          else if (date > dateEnd)
+            $scope.available = 'Contest ended';
+          else{
+            $scope.available = 'ok'
+            $scope.remind = ' Receive submissions from '
+              + new Date(response.dateStart).toUTCString() 
+              + ' to ' + new Date(response.dateEnd).toUTCString();
+          }
+          //console.log($scope.available);  
+        }
+        else{
+          $scope.remind = "";
+          $scope.available = 'ok';
+        }
+        
       });
     }
       

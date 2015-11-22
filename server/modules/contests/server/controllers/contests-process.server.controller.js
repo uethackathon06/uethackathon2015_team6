@@ -68,6 +68,14 @@ exports.getcontest = function(req, res){
       return;
     }
     contest = contest.toObject();
+
+    //if contest has not started
+    if (contest.setTime && new Date().getTime() < contest.dateStart.getTime()){
+      contest.questions = [];
+      res.json(contest);       
+      return;
+    }
+
     for(var i = 0; i < contest.questions.length; i++){
       for(var j = 0; j < contest.questions[i].choices.length; j++){
         contest.questions[i].choices[j].correct = false;
@@ -102,15 +110,16 @@ exports.parseText = function(req, res) {
     process.on("exit", function (code) {
       console.log("spawnEXIT:", code)
     });
-  }, 100);
+  }, 500);
 
   setTimeout(function() {
     var obj = JSON.parse(fs.readFileSync('../output.txt', 'utf8'));
     res.json(obj);
-  }, 100);
+  }, 1000);
 }
 
 exports.saveFile = function(req, res){
+  console.log(req.body);
   var fs = require('fs');
   fs.writeFile("../input.txt", JSON.stringify(req.body), function(err) {
       if(err) {
@@ -134,7 +143,7 @@ exports.saveFile = function(req, res){
       console.log("spawnEXIT:", code);
       res.json('ok');
     });
-  }, 100);
+  }, 800);
 }
 
 exports.download = function(req, res){

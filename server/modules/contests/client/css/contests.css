@@ -14,6 +14,7 @@
 
 .question {
 	font-size: 16px;
+	border-radius: 10px;
 }
 
 .correctChoice {
@@ -21,9 +22,9 @@
 }
 
 .save-btn {
-	bottom: -20px;
-	right: -95px;
-	width: 200px;
+	bottom: -40px;
+	right: -320px;
+	width: 150px;
 	position: relative;
 }
 
@@ -66,4 +67,36 @@
 	background-color: #f8ecc2;
 	border-radius: 15px 50px 30px 5px;
 	height: 600px;
+}
+
+.download-btn {
+	bottom: -40px;
+	right: 260px;
+	width: 110px;
+	position: relative;
+}
+
+.shuffle-btn {
+	bottom: -40px;
+	right: 260px;
+	width: 110px;
+	position: relative;
+}
+
+.gly {
+	color: #616161;
+	visibility: hidden;
+}
+
+.gly-ctn:hover > .gly{
+	visibility: visible;
+}
+
+.time-label {
+	bottom: -5px;
+}
+
+.time-checkbox {
+	font-size: 16px;
+	bottom: 100px;
 }

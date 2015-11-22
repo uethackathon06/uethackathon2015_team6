@@ -20,6 +20,10 @@ var ContestSchema = new Schema({
   dateEnd: {
     type: Date
   },
+  setTime: {
+    type: Boolean,
+    default: false
+  },
   header: {
     type: String,
     default: 'Default Title'

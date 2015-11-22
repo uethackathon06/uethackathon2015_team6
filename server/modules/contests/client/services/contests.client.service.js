@@ -23,10 +23,8 @@ angular.module('contests').factory('ContestService',[
 	  		var tmp = new Array(n);
 	  		for(var i = 0; i < n; i++)
 	  			tmp[i] = arr[key[i]];
-	  		arr = tmp;
-	  		console.log(arr);
 	  		console.log(key);
-	  		return key;
+	  		return {arr: tmp, key: key};
 	  	},
 
 	  	//given an arr and key, restore that arr

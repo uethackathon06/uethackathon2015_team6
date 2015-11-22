@@ -1,36 +1,70 @@
 <section ng-controller="contestsController" ng-init="init()" class="col-md-offset-1">
   <div class="row">
-    <h2 class="col-md-6 contest-header">
+    <h2 class="col-md-4 page-header contest-header">
       <div id="{{header.id + '-text'}}" ng-hide="header.edit" ng-bind="header.text" ng-click="startEdit(header)">{{header.text}}</div>
       <form ng-show="header.edit" ng-submit="finishEdit(header)">
         <input class="form-control" id="{{header.id + '-edit'}}" type="text" ng-model="header.text" placeholder="Enter a title"/>
       </form>
     </h2>  
+    
+    <button class="btn shuffle-btn" ng-click="shuffle()">
+      <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+      Shuffle
+    </button> 
+    <button class="btn download-btn" ng-click="download()">
+      <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+      Download
+    </button>
+    
     <div class="col-md-4">
-      <button class="btn btn-success save-btn" ng-click="save()">Save Contest</button>
-    </div>
-    <div class="col-md-4">
-      <button class="btn btn-success save-btn" ng-click="download()">Down</button>
-    </div>
-    <div class="col-md-4">
-      <button class="btn btn-success save-btn" ng-click="shuffle()">Supp</button>
+      <button class="btn btn-success save-btn" ng-click="save()">Save Change</button>
     </div>
   </div>
-  
+    
+  <div class="container">
+    <div class="col-sm-3 col-md-offset-1">
+      <div class="row">
+        <label class="checkbox-inline row">
+        <input type="checkbox" value="" ng-model="contest.setTime">
+          <span class="time-checkbox">Set time</span>
+        </label>
+      </div>
+      <div class="row">
+        <label class="checkbox-inline row">
+        <input type="checkbox" value="">
+          <span class="time-checkbox">Shuffle in test</span>
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-6" style="height:75px;" ng-show="contest.setTime">
+       <div class='col-md-5'>
+        <div class="form-group">
+          <div>Start</div>
+          <input type='text' class="form-control" id="startDate"/>
+        </div>
+      </div>
+      <div class='col-md-5'>
+        <div class="form-group">
+          <div>End</div>
+          <input type='text' class="form-control" id="endDate" />
+        </div>
+      </div>
+    </div>
+  </div>
   <br>
 
   <div class="container col-md-10 questions">
     <div ng-repeat="question in questions" class="question">
-      <div class="row">
-        <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click="question.edit = !question.edit"></span>  
-        <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteQuestion(questions, $index)"></span>  
+      <div class="row gly-ctn">
+        <span class="gly glyphicon glyphicon-pencil" aria-hidden="true" ng-click="question.edit = !question.edit"></span>  
+        <span class="gly glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteQuestion(questions, $index)"></span>  
         <span ng-hide="question.edit"><b>{{($index + 1).toString() + "." + question.text}}</b></span>
         <form style="display:inline" ng-show="question.edit" ng-submit="question.edit = !question.edit"><input ng-model="question.text" class="question-input"></input></form>
       </div>
       <br>
-      <div class="col-md-offset-1" ng-repeat="choice in question.choices">
-        <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click="choice.edit = !choice.edit"></span>  
-        <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteChoice(question, $index)"></span>  
+      <div class="col-md-offset-1 gly-ctn" ng-repeat="choice in question.choices">
+        <span class="gly glyphicon glyphicon-pencil" aria-hidden="true" ng-click="choice.edit = !choice.edit"></span>  
+        <span class="gly glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteChoice(question, $index)"></span>  
         <button class="btn-xs" ng-class="{'btn-success': choice.correct, 'btn-defaut': !choice.correct}" ng-click="toggleChoice(choice)"><b>{{chr[$index] + "."}}</b></button>
         <span ng-hide="choice.edit" ng-click="toggleChoice(choice)">{{choice.text}}</span>
         <form style="display:inline" ng-show="choice.edit" ng-submit="choice.edit = !choice.edit"><input ng-model="choice.text" class="choice-input"></input></form>
