@@ -2,8 +2,11 @@ package barry.qzy;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -23,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -159,6 +163,19 @@ public class MainActivity extends ActionBarActivity
     void    setUpGetTest() {
         final EditText    testUrl = (EditText) getTestView.findViewById(R.id.test_url);
         Button      getTestButton = (Button) getTestView.findViewById(R.id.get_test);
+        ImageButton copyFromClip  = (ImageButton)   getTestView.findViewById(R.id.copy_from_clip);
+
+        copyFromClip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager    clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData            clip = clipboard.getPrimaryClip();
+                if (clip != null) {
+                    testUrl.setText(clip.getItemAt(0).getText());
+                }
+            }
+        });
+
         getTestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -293,6 +310,16 @@ public class MainActivity extends ActionBarActivity
         TextView    questionTextView = (TextView)       quizView.findViewById(R.id.quiz_question);
         TableLayout answerTable      = (TableLayout)    quizView.findViewById(R.id.quiz_answers);
         Button      submitButton     = (Button)         quizView.findViewById(R.id.quiz_submit);
+        ImageButton nextQuizButton   = (ImageButton)    quizView.findViewById(R.id.nextQuiz);
+        final TextView    quizResult       = (TextView)       quizView.findViewById(R.id.quizResult);
+
+        nextQuizButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getQuiz(username);
+                quizResult.setText("");
+            }
+        });
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -304,7 +331,6 @@ public class MainActivity extends ActionBarActivity
                     }
                 }
 
-                TextView quizResult = (TextView) quizView.findViewById(R.id.quizResult);
 
                 if (check) {
                     quizResult.setText("Đúng");

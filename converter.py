@@ -17,25 +17,55 @@ a = fi.read()
 
 hits = [m.start() for m in re.finditer(r"Câu\b" , a)]
 if (len(hits) == 0): 
-	hits = [m.start() for m in re.finditer(r"Question\b" , a)]
-if (len(hits) == 0): 
 	hits = [m.start() for m in re.finditer(r"Bài\b" , a)]
 if (len(hits) == 0): 
+	hits = [m.start() for m in re.finditer(r"Question\b" , a)]
+if (len(hits) == 0): 
 	hits = [m.start() for m in re.finditer(r"\d\." , a)]
-if (len(hits) == 0):
-	hits = [m.start() for m in re.finditer(r"Q\b" , a)]
 Ahits = [m.start() for m in re.finditer(r"A\." , a)]
 if (len(Ahits) == 0):
 	Ahits = [m.start() for m in re.finditer(r"a\." , a)]
+if (len(Ahits) == 0):
+	Ahits = [m.start() for m in re.finditer(r"(a)\b" , a)]
+if (len(Ahits) == 0):
+	Ahits = [m.start() for m in re.finditer(r"(A)\b" , a)]
+if (len(Ahits) == 0):
+	Ahits = [m.start() for m in re.finditer(r"a)\b" , a)]
+if (len(Ahits) == 0):
+	Ahits = [m.start() for m in re.finditer(r"A)\b" , a)]
 Bhits = [m.start() for m in re.finditer(r"B\." , a)]
 if (len(Bhits) == 0):
 	Bhits = [m.start() for m in re.finditer(r"b\." , a)]
+if (len(Bhits) == 0):
+	Bhits = [m.start() for m in re.finditer(r"(b)\b" , a)]
+if (len(Bhits) == 0):
+	Bhits = [m.start() for m in re.finditer(r"(B)\b" , a)]
+if (len(Bhits) == 0):
+	Bhits = [m.start() for m in re.finditer(r"b)\b" , a)]
+if (len(Bhits) == 0):
+	Bhits = [m.start() for m in re.finditer(r"B)\b" , a)]
 Chits = [m.start() for m in re.finditer(r"C\." , a)]
 if (len(Chits) == 0):
 	Chits = [m.start() for m in re.finditer(r"c\." , a)]
+if (len(Chits) == 0):
+	Chits = [m.start() for m in re.finditer(r"(c)\b" , a)]
+if (len(Chits) == 0):
+	Chits = [m.start() for m in re.finditer(r"(C)\b" , a)]
+if (len(Chits) == 0):
+	Chits = [m.start() for m in re.finditer(r"c)\b" , a)]
+if (len(Chits) == 0):
+	Chits = [m.start() for m in re.finditer(r"C)\b" , a)]
 Dhits = [m.start() for m in re.finditer(r"D\." , a)]
 if (len(Dhits) == 0):
 	Dhits = [m.start() for m in re.finditer(r"d\." , a)]
+if (len(Dhits) == 0):
+	Dhits = [m.start() for m in re.finditer(r"(d)\b" , a)]
+if (len(Dhits) == 0):
+	Dhits = [m.start() for m in re.finditer(r"(D)\b" , a)]
+if (len(Dhits) == 0):
+	Dhits = [m.start() for m in re.finditer(r"d)\b" , a)]
+if (len(Dhits) == 0):
+	Dhits = [m.start() for m in re.finditer(r"D\b" , a)]
 
 print hits , Ahits , Bhits , Chits , Dhits
 
@@ -83,7 +113,7 @@ while (qi < len(hits)):
 
 	tres = {}
 
-	if ((a[hits[qi]] > '9') and (a[hits[qi]] < '0')):
+	if ((a[hits[qi]] > '9') or (a[hits[qi]] < '0')):
 		if (a[hits[qi]+7] == ' '):
 			tres["question"] =  a[hits[qi]+7:Ahits[ai]].decode("utf-8")
 		else:

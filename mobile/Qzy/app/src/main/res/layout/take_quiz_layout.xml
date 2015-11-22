@@ -37,4 +37,18 @@
         android:textAllCaps="false"
         android:layout_gravity="center_horizontal" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+
+        <ImageButton
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:id="@+id/nextQuiz"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@drawable/nextbutton1"
+            android:layout_marginBottom="4dp" />
+    </FrameLayout>
+
 </LinearLayout>
