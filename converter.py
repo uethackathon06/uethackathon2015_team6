@@ -113,7 +113,7 @@ while (qi < len(hits)):
 
 	tres = {}
 
-	if ((a[hits[qi]] > '9') and (a[hits[qi]] < '0')):
+	if ((a[hits[qi]] > '9') or (a[hits[qi]] < '0')):
 		if (a[hits[qi]+7] == ' '):
 			tres["question"] =  a[hits[qi]+7:Ahits[ai]].decode("utf-8")
 		else:
