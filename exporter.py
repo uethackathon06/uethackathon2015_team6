@@ -15,7 +15,7 @@ document.add_heading(test["header"] , 0)
 test = test["questions"]
 
 for i in range(len(test)):
-	ss = "Câu " + str(i+1) + "." + test[i]["text"]
+	ss = u"Câu " + str(i+1) + "." + test[i]["text"]
 	for j in range(len(test[i]["choices"])):
 		ss += chr(ord('A') + j) + ". " + test[i]["choices"][j]["text"]
 	document.add_paragraph(ss)
