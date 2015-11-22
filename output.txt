@@ -1,137 +1,20 @@
 [
     {
         "answer": [
-            " với hiđro.\n",
-            " với oxi.\n",
-            " với hiđro, oxi và nhiều nguyên tố khác.\n",
-            " trừ CO, CO2, muối cacbonat, xianua,...\n\n"
+            " đứng yên hoặc quay đều.    ",
+            " quay nhanh dần đều. ",
+            " quay chậm dần đều.      ",
+            " quay với tính chất khác. 1"
         ],
-        "question": "u 1. Hợp chất hữu cơ là hợp chất của cacbon\n"
+        "question": " Xét vật rắn quay quanh một trục cố định. Khi hợp lực tác dụng vào vật rắn có momen triệt tiêu thì vật rắn có chuyển động "
     },
     {
         "answer": [
-            " hiđrocacbon và các chất không phải hiđrocacbon.\n",
-            " hiđrocacbon và các hợp chất chứa oxi.\n",
-            " hiđrocacbon và dẫn xuất của hiđrocacbon.\n",
-            " hiđrocacbon và các hợp chất có nhóm chức.\n\n"
+            " gia tốc trọng trường nơi đặt hệ chất điểm. ",
+            " khối lượng của mỗi chất điểm. ",
+            " sự phân bố của các chất điểm. ",
+            " khoảng cách giữa các chất điểm."
         ],
-        "question": "u 2. Theo thành phần nguyên tố, hợp chất hữu cơ được chia thành\n"
-    },
-    {
-        "answer": [
-            " nguyên tố cacbon và hiđro.\n",
-            " nguyên tố cacbon.\n",
-            " nguyên tố cacbon, hiđro và oxi.\n",
-            " nguyên tố cacbon và nitơ.\n\n"
-        ],
-        "question": "u 3. Trong thành phần phân tử chất hữu cơ nhất thiết phải có\n"
-    },
-    {
-        "answer": [
-            " Tan tốt trong nước.\n",
-            " Bền với nhiệt.\n",
-            " Khả năng phản ứng cao.\n",
-            " Dễ bay hơi.\n\n"
-        ],
-        "question": "u 4. Các chất hữu cơ có điểm nào sau đây chung?\n"
-    },
-    {
-        "answer": [
-            " chủ yếu là liên kết cộng hoá trị.\n",
-            " chủ yếu là liên kết ion.\n",
-            " chủ yếu là liên kết cho nhận.\n",
-            " chỉ gồm các liên kết cộng hoá trị.\n\n"
-        ],
-        "question": "u 5. Liên kết hoá học trong phân tử chất hữu cơ\n"
-    },
-    {
-        "answer": [
-            " phân tử luôn có cacbon, hiđro và oxi.\n",
-            " nhiệt độ nóng chảy cao.\n",
-            " khả năng phản ứng cao.\n",
-            " phân tử luôn có cacbon.\n\n"
-        ],
-        "question": "u 6. Các chất hữu cơ có điểm chung là\n"
-    },
-    {
-        "answer": [
-            " xảy ra nhanh và tạo ra hỗn hợp sản phẩm.\n",
-            " xảy ra chậm và tạo ra một sản phẩm duy nhất.\n",
-            " xảy ra chậm và tạo ra hỗn hợp sản phẩm.\n",
-            " xảy ra chậm và tạo ra hỗn hợp sản phẩm đồng phân của nhau.\n\n"
-        ],
-        "question": "u 7. Phản ứng hoá học của các chất hữu cơ thường\n"
-    },
-    {
-        "answer": [
-            " phân tử luôn có cacbon, hiđro và oxi.\n",
-            " nhiệt độ nóng chảy cao.\n",
-            " khả năng phản ứng chậm và không theo một hướng xác định.\n",
-            " phân tử luôn có cacbon, nitơ và hiđro.\n\n"
-        ],
-        "question": "u 8. Các chất hữu cơ có điểm chung là\n"
-    },
-    {
-        "answer": [
-            " CH2Cl2, CH2Br–CH2Br, NaCl, CH3Br, CH3CH2Br.\n",
-            " CH2Cl2, CH2Br–CH2Br, CH2=CHCOOH, CH3Br, CH3CH2OH.\n",
-            " FeCl2, CH2Br–CH2Br, CH2=CHCl, CH3Br, CH3CH2Br.\n",
-            " Hg2Cl2, CH2Br–CH2Br, CH2=CHCl, Na2SO4, CH3CH2Br.\n\n"
-        ],
-        "question": "u 9. Nhóm chất nào dưới đây đều là dẫn xuất của hiđrocacbon ?\n"
-    },
-    {
-        "answer": [
-            " tìm công thức phân tử của chất hữu cơ.\n",
-            " tìm công thức đơn giản nhất của chất hữu cơ.\n",
-            " xác định phân tử khối của chất hữu cơ.\n",
-            " xác định các nguyên tố trong phân tử chất hữu cơ.\n\n"
-        ],
-        "question": "u 10. Mục đích của phân tích định tính là\n"
-    },
-    {
-        "answer": [
-            " tìm công thức phân tử của chất hữu cơ.\n",
-            " xác định thành phần phần trăm khối lượng các nguyên tố trong phân tử chất hữu cơ.\n",
-            " xác định phân tử khối của chất hữu cơ.\n",
-            " xác định các nguyên tố trong phân tử chất hữu cơ.\n\n"
-        ],
-        "question": "u 11. Mục đích của phân tích định lượng là\n"
-    },
-    {
-        "answer": [
-            " số nguyên tử của các nguyên tố trong phân tử.\n",
-            " tỉ lệ tối giản về số nguyên tử của các nguyên tố trong phân tử.\n",
-            " phân tử khối của chất hữu cơ.\n",
-            " thứ tự liên kết giữâ các nguyên tử trong phân tử.\n\n"
-        ],
-        "question": "u 12. Công thức đơn giản nhất cho biết\n"
-    },
-    {
-        "answer": [
-            " số nguyên tử của các nguyên tố trong phân tử.\n",
-            " tỉ lệ tối giản về số nguyên tử của các nguyên tố trong phân tử.\n",
-            " phân tử Khối của chất hữu cơ.\n",
-            " thứ tự liên kết giữâ các nguyên tử trong phân tử.\n\n"
-        ],
-        "question": "u 13. Công thức phân tử cho biết\n"
-    },
-    {
-        "answer": [
-            " Phân tử chất X chắc chắn phải có các nguyên tố C, H, O, N.\n",
-            " Phân tử chất X chắc chắn phải có các nguyên tố C, H, có thể có các nguyên tố O, N.\n",
-            " Phân tử chất X chỉ có các nguyên tố C, H.\n",
-            " Phân tử chất X chắc chắn phải có các nguyên tố C, H, O.\n\n"
-        ],
-        "question": "u 14. Khi đốt cháy chất hữu cơ X bằng oxi không khí thu được hỗn hợp khí và hơi gồm CO2, H2O, N2. Điều đó chứng tỏ:\n"
-    },
-    {
-        "answer": [
-            " Các chất có cùng công thức đơn giản nhất sẽ có cùng công thức phân tử.\n",
-            " Nhiều chất khác nhau có công thức đơn giản nhất giống nhau.\n",
-            " Các chất khác nhau có thể có cùng công thức đơn giản nhất nhưng sẽ có công thức phân tử khác nhau.\n",
-            " Các chất đồng phân của nhau sẽ có công thức đơn giản nhất khác nhau"
-        ],
-        "question": "u 15. Kết luận nào sau đây đúng?\n"
+        "question": "  Khối tâm của hệ chất điểm không phụ thuộc vào "
     }
 ]

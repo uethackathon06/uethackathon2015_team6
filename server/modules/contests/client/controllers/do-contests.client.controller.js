@@ -36,12 +36,18 @@ angular.module('contests').controller('doContestsController', ['$scope', '$state
             $scope.available = 'Contest has not started';
           else if (date > dateEnd)
             $scope.available = 'Contest ended';
-          else
-            $scope.available = 'ok';
-          console.log($scope.available);  
+          else{
+            $scope.available = 'ok'
+            $scope.remind = ' Receive submissions from '
+              + new Date(response.dateStart).toUTCString() 
+              + ' to ' + new Date(response.dateEnd).toUTCString();
+          }
+          //console.log($scope.available);  
         }
-        else
+        else{
+          $scope.remind = "";
           $scope.available = 'ok';
+        }
         
       });
     }

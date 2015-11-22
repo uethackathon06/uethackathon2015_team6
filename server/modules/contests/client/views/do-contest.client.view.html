@@ -13,6 +13,9 @@
   <div class="alert alert-danger" ng-show="available !='ok'">
     {{available}}
   </div>
+  <div class="alert alert-warning" ng-show="available ==='ok' && remind">
+    {{remind}}
+  </div>
 
   <div class="container col-md-10 questions">
     <div ng-repeat="question in questions" class="question">

@@ -171,11 +171,14 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
     };
 
     $scope.download = function(){
+      $scope.contest.questions = $scope.questions;
       $http.post('/contest/savefile', $scope.contest).
       success(function(response){
         //$http.get('/contest/savefile');
         //$window.open('/download');
-        window.location.href = '/contest/savefile';
+        setTimeout(function(){
+          window.location.href = '/contest/savefile';
+        }, 1000)
       })
     }
 
@@ -183,6 +186,7 @@ angular.module('contests').controller('contestsController', ['$scope', '$statePa
       //var newObject = jQuery.extend(true, {}, oldObject);
       var shuffle = ContestService.createShuffle($scope.questions);
       $scope.questions = shuffle.arr;
+      $scope.contest.questions = shuffle.arr;
       console.log($scope.questions);
     }
   }

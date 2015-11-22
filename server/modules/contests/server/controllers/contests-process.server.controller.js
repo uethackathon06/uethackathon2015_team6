@@ -115,10 +115,11 @@ exports.parseText = function(req, res) {
   setTimeout(function() {
     var obj = JSON.parse(fs.readFileSync('../output.txt', 'utf8'));
     res.json(obj);
-  }, 500);
+  }, 1000);
 }
 
 exports.saveFile = function(req, res){
+  console.log(req.body);
   var fs = require('fs');
   fs.writeFile("../input.txt", JSON.stringify(req.body), function(err) {
       if(err) {
@@ -142,7 +143,7 @@ exports.saveFile = function(req, res){
       console.log("spawnEXIT:", code);
       res.json('ok');
     });
-  }, 500);
+  }, 800);
 }
 
 exports.download = function(req, res){
